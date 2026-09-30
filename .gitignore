@@ -6,3 +6,7 @@ desktop.ini
 # Editor settings
 .vscode/
 .idea/
+
+# Internal working notes — not part of the handoff
+CLAUDE.md
+INVENTORY.md

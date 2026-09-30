@@ -26,43 +26,18 @@
     --bs-navbar-nav-link-padding-x: 0.75rem;
 }
 
-/* ---- Logo ---------------------------------------------------------- */
-/* Every size is in em, so the whole lock-up scales from one font-size.
-   At 1rem: mark 60 × 67px, name 17px, tagline 12px — the desktop PDF. */
+/* ---- Logo ----------------------------------------------------------
+   One supplied SVG lock-up (mark + wordmark + tagline), so the height is
+   all that needs setting — 225 x 70 in the file, ~3.2:1. */
 .lf-header-logo {
     display: inline-flex;
-    align-items: flex-end;
-    gap: 0.3em;
-    font-size: 0.6rem;
-    color: var(--lf-purple);
+    align-items: center;
 }
 
-.lf-header-logo:hover {
-    color: var(--lf-purple);
-}
-
-.lf-header-logo-mark {
-    flex-shrink: 0;
+.lf-header-logo-img {
+    display: block;
     width: auto;
-    height: 4.1875em;
-}
-
-.lf-header-logo-text {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 0.1em;
-    font-family: var(--lf-font-logo);
-    line-height: 1.25;
-    white-space: nowrap;
-}
-
-.lf-header-logo-name {
-    font-size: 1.0625em;
-    font-weight: 700;
-}
-
-.lf-header-logo-tagline {
-    font-size: 0.75em;
+    height: 2.5rem;
 }
 
 /* ---- Search --------------------------------------------------------
@@ -176,8 +151,8 @@
         --bs-navbar-padding-y: 1.625rem;
     }
 
-    .lf-header-logo {
-        font-size: 1rem;
+    .lf-header-logo-img {
+        height: 4.1875rem;
     }
 
     .lf-header-search {

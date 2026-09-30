@@ -10,43 +10,17 @@
     color: var(--lf-white);
 }
 
-/* ---- Logo ---------------------------------------------------------- */
-/* Every size is in em, so the whole lock-up scales from one font-size.
-   Mobile draws it half as big again as desktop (mark 100px tall). */
+/* ---- Logo ----------------------------------------------------------
+   The white lock-up. Mobile draws it larger than desktop, as in the PDF. */
 .lf-footer-logo {
     display: inline-flex;
-    align-items: flex-end;
-    gap: 0.3em;
-    font-size: 1.5rem;
-    color: var(--lf-white);
+    align-items: center;
 }
 
-.lf-footer-logo:hover {
-    color: var(--lf-white);
-}
-
-.lf-footer-logo-mark {
-    flex-shrink: 0;
+.lf-footer-logo-img {
+    display: block;
     width: auto;
-    height: 4.1875em;
-}
-
-.lf-footer-logo-text {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 0.1em;
-    font-family: var(--lf-font-logo);
-    line-height: 1.25;
-    white-space: nowrap;
-}
-
-.lf-footer-logo-name {
-    font-size: 1.0625em;
-    font-weight: 700;
-}
-
-.lf-footer-logo-tagline {
-    font-size: 0.75em;
+    height: 5rem;
 }
 
 /* ---- Link columns -------------------------------------------------- */
@@ -71,7 +45,7 @@
 
 /* ---- lg and up ----------------------------------------------------- */
 @media (min-width: 992px) {
-    .lf-footer-logo {
-        font-size: 1rem;
+    .lf-footer-logo-img {
+        height: 4.1875rem;
     }
 }
