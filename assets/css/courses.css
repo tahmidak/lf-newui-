@@ -1,0 +1,186 @@
+/* ============================================
+    ALL COURSES (listing)
+    Page sections: lf-ac-h (page header), lf-ac-cat (category filter),
+    lf-ac-bar (search + sort), lf-ac-grid (course grid).
+    Pagination is the universal lf-pagi.
+============================================ */
+
+/* ---- Category filter: lf-ac-cat -----------------------------------
+   A wide multi-column block across the top, not a sidebar. Below lg the
+   list collapses behind a toggle that sits beside Sort By, and gains its
+   own "Search category" input — how the mobile design draws it. */
+.lf-ac-cat {
+    padding-bottom: 0.5rem;
+}
+
+.lf-ac-cat-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 0.75rem;
+}
+
+.lf-ac-cat-search-input {
+    width: 100%;
+    padding: 0.5rem 2.75rem 0.5rem 1.125rem;
+    border: 1px solid var(--lf-bg);
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-surface);
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-ac-cat-search-input:focus {
+    outline: 0;
+    border-color: var(--lf-purple);
+    box-shadow: 0 0 0 0.25rem var(--lf-focus-ring);
+}
+
+.lf-ac-cat-search-btn {
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    width: 2.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--lf-radius-pill);
+    background: transparent;
+    color: var(--lf-purple);
+}
+
+/* The list itself — CSS columns, so the count reflows with the width */
+.lf-ac-cat-list {
+    margin: 0.75rem 0 0;
+    padding: 0;
+    columns: 9rem;
+    column-gap: 1.5rem;
+    list-style: none;
+}
+
+.lf-ac-cat-link {
+    display: block;
+    padding-block: 0.25rem;
+    color: var(--lf-purple);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-ac-cat-link:hover {
+    color: var(--lf-purple-mid);
+    text-decoration: underline;
+}
+
+.lf-ac-cat-link.active {
+    font-weight: 700;
+}
+
+/* ---- Search + sort bar: lf-ac-bar ---------------------------------- */
+.lf-ac-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Below lg the two dropdown buttons share a row under the search box */
+.lf-ac-bar-controls {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.lf-ac-bar-controls > * {
+    flex: 1 1 0;
+}
+
+.lf-ac-bar-search {
+    position: relative;
+    display: flex;
+    flex: 1 1 18rem;
+    align-items: center;
+    max-width: 22rem;
+}
+
+.lf-ac-bar-search-input {
+    width: 100%;
+    padding: 0.625rem 3rem 0.625rem 1.25rem;
+    border: 1px solid var(--lf-purple-light);
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-white);
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-ac-bar-search-input:focus {
+    outline: 0;
+    border-color: var(--lf-purple);
+    box-shadow: 0 0 0 0.25rem var(--lf-focus-ring);
+}
+
+.lf-ac-bar-search-btn {
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    width: 3rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--lf-radius-pill);
+    background: transparent;
+    color: var(--lf-purple);
+}
+
+/* Sort By — Bootstrap dropdown, themed through its own variables */
+.lf-ac-sort {
+    --bs-dropdown-min-width: 12rem;
+    --bs-dropdown-padding-y: 0.5rem;
+    --bs-dropdown-border-width: 0;
+    --bs-dropdown-border-radius: var(--lf-radius);
+    --bs-dropdown-link-color: var(--lf-ink);
+    --bs-dropdown-link-hover-bg: var(--lf-bg);
+    --bs-dropdown-link-active-bg: var(--lf-purple-light);
+    --bs-dropdown-link-active-color: var(--lf-white);
+    --bs-dropdown-item-padding-y: 0.5rem;
+    --bs-dropdown-font-size: var(--lf-fs-sm);
+}
+
+.lf-ac-sort-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.625rem 1.5rem;
+    border: 0;
+    border-radius: var(--lf-radius);
+    background-color: var(--lf-surface);
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-ac-sort-btn:hover {
+    background-color: var(--lf-bg);
+}
+
+.lf-ac-sort-menu {
+    text-align: center;
+}
+
+@media (max-width: 991.98px) {
+    .lf-ac-bar-search {
+        flex: 1 1 100%;
+        max-width: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .lf-ac-cat-list {
+        margin-top: 0;
+    }
+
+    /* From lg the category list is always open, so its toggle goes away
+       and Sort By sits on the right of the search box. */
+    .lf-ac-bar-controls {
+        width: auto;
+    }
+}

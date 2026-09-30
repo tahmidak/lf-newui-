@@ -1,0 +1,107 @@
+/* ============================================
+    EXPAND / COLLAPSE BLOCK
+    abbr: lf-expand
+    Universal. Course overview, bundle overview, the Lifetime category
+    grid — anything that should show a fixed slice and open on demand.
+
+    The block is clamped to --lf-expand-h, with a fade over the cut edge
+    and a toggle underneath. assets/js/expand.js measures the content and
+    only shows the toggle when something is actually hidden, so short
+    content looks untouched.
+
+    Hooks: data-lf-expand (wrapper, optional data-lf-expand-h override),
+           data-lf-expand-body, data-lf-expand-toggle.
+============================================ */
+
+.lf-expand {
+    --lf-expand-h: 16rem;
+    --lf-expand-fade: var(--lf-bg);
+    position: relative;
+}
+
+.lf-expand-body {
+    position: relative;
+    overflow: hidden;
+    max-height: var(--lf-expand-h);
+    transition: max-height 0.4s ease;
+}
+
+/* Fade over the cut edge, only while there is more to see */
+.lf-expand-body::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 5rem;
+    background: linear-gradient(to bottom, transparent, var(--lf-expand-fade));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.lf-expand-more .lf-expand-body::after {
+    opacity: 1;
+}
+
+.lf-expand-open .lf-expand-body::after {
+    opacity: 0;
+}
+
+/* Hidden until JS finds there is something to reveal */
+.lf-expand-toggle {
+    display: none;
+}
+
+.lf-expand-more .lf-expand-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+/* Label swap: "See More" / "See Less" */
+.lf-expand-less,
+.lf-expand-open .lf-expand-more-label {
+    display: none;
+}
+
+.lf-expand-open .lf-expand-less {
+    display: inline;
+}
+
+/* Arrow variant — the caret under the category grid */
+.lf-expand-caret {
+    width: 2rem;
+    height: 2rem;
+    margin-inline: auto;
+    padding: 0;
+    border: 0;
+    border-radius: var(--lf-radius-pill);
+    background: transparent;
+    color: currentColor;
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.lf-expand-caret i {
+    transition: transform 0.3s ease;
+}
+
+.lf-expand-open .lf-expand-caret i {
+    transform: rotate(180deg);
+}
+
+/* Centre the toggle when it sits under a centred block */
+.lf-expand-center {
+    display: flex;
+    justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lf-expand-body,
+    .lf-expand-body::after,
+    .lf-expand-caret i {
+        transition: none;
+    }
+}

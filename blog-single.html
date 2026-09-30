@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Learning Facility</title>
+
+    <!-- Fonts: Lato (UI/body), Open Sans (logo wordmark) — see tokens.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ============================================
+        HEADER
+        abbr: lf-header
+        Bootstrap JS doing real work here:
+        - offcanvas: the mobile menu (#lfHeaderMenu)
+        - collapse:  the mobile search row (#lfHeaderSearch)
+    ============================================ -->
+    <header class="lf-header" data-lf-header>
+        <nav class="navbar navbar-expand-lg lf-header-bar" aria-label="Main">
+            <div class="lf-container d-flex flex-wrap flex-lg-nowrap align-items-center">
+
+                <!-- DYNAMIC: home_url() -->
+                <!-- The mark is a traced placeholder — swap for the real logo file. -->
+                <a class="lf-header-logo" href="home.html">
+                    <svg class="lf-header-logo-mark" viewBox="0 0 213 238" aria-hidden="true" focusable="false">
+                        <path fill="currentColor" d="M0 65 28 29v139l37 33V108h25v129A119 119 0 0 1 0 173Z"/>
+                        <path fill="currentColor" d="M110 0a119 119 0 0 1 95 52l-24 16a91 91 0 0 0-43-34v69h67v30h-67v101l-28 4Z"/>
+                    </svg>
+                    <span class="lf-header-logo-text">
+                        <span class="lf-header-logo-name">Learning Facility</span>
+                        <span class="lf-header-logo-tagline">Your key to lifelong learning</span>
+                    </span>
+                </a>
+
+                <!-- Search: always visible from lg; a collapse row below lg -->
+                <div class="collapse d-lg-block order-last order-lg-0 lf-header-search" id="lfHeaderSearch">
+                    <!-- DYNAMIC: action = home_url('/'), post_type = Tutor LMS courses -->
+                    <form class="lf-search" role="search" action="#" method="get">
+                        <label class="visually-hidden" for="lfHeaderSearchInput">Search courses</label>
+                        <input class="lf-search-input" id="lfHeaderSearchInput" type="search" name="s" placeholder="Search Courses ...">
+                        <input type="hidden" name="post_type" value="courses">
+                        <button class="lf-search-btn" type="submit" aria-label="Search"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Nav: inline from lg; an offcanvas panel below lg -->
+                <div class="offcanvas offcanvas-top lf-header-menu" id="lfHeaderMenu" tabindex="-1" aria-label="Main menu" data-lf-header-menu>
+                    <div class="offcanvas-body">
+                        <!-- DYNAMIC: wp_nav_menu( primary ) — one <li> per menu item -->
+                        <ul class="navbar-nav ms-lg-auto lf-header-nav">
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link" href="home.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link lf-header-link-hot" href="hot-deals.html">Hot Deals<span aria-hidden="true">🔥</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link" href="courses.html">All Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <!-- DYNAMIC: login / dashboard link depending on is_user_logged_in() -->
+                                <a class="nav-link lf-header-link" href="#">Log In/Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center ms-auto lf-header-actions">
+                    <button class="lf-header-icon-btn d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#lfHeaderSearch" aria-controls="lfHeaderSearch" aria-expanded="false" aria-label="Search courses">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <circle cx="10.5" cy="10.5" r="7"/>
+                            <path d="m15.75 15.75 5.25 5.25"/>
+                        </svg>
+                    </button>
+
+                    <!-- DYNAMIC: wc_get_cart_url() -->
+                    <a class="lf-header-icon-btn" href="cart.html" aria-label="Cart">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                            <path d="M1.5 2.5h2.75l2.5 12.5h12.5l2.5-9H5.5"/>
+                            <circle cx="9" cy="19.75" r="1.75"/>
+                            <circle cx="17" cy="19.75" r="1.75"/>
+                        </svg>
+                    </a>
+
+                    <button class="lf-header-icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#lfHeaderMenu" aria-controls="lfHeaderMenu" aria-expanded="false" aria-label="Menu">
+                        <svg class="lf-header-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <path d="M3 5h18M3 12h18M3 19h18"/>
+                        </svg>
+                        <svg class="lf-header-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <path d="M5 5l14 14M19 5 5 19"/>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ============================================
+            SINGLE BLOG — lf-sblg
+            Two rows, like a table:
+              row 1 · title + excerpt + featured image | promo artwork
+              row 2 · article body                     | table of contents
+            Only the contents list is sticky. The article is .lf-rich, so
+            every tag the editor prints is styled (rich.css).
+        ============================================ -->
+        <section class="lf-section lf-sblg">
+            <div class="lf-container">
+
+                <!-- ---- Row 1 ---- -->
+                <div class="row g-4 g-lg-5">
+                    <div class="col-12 col-lg-8">
+                        <header class="lf-sblg-h">
+                            <!-- DYNAMIC: post_title -->
+                            <h1 class="lf-sblg-h-title">Can You Reheat Cooked Prawns From the Fridge? A UK Food Safety Guide</h1>
+                            <!-- DYNAMIC: excerpt -->
+                            <p class="lf-sblg-h-standfirst">If stored and heated correctly, yes. Our UK guide covers safe times, temperatures and methods.</p>
+                        </header>
+
+                        <!-- DYNAMIC: featured image -->
+                        <img class="lf-sblg-featured" src="assets/imgs/blog-featured.jpg" alt="">
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <!-- DYNAMIC: promo banner (an image in a link, not a coded card) -->
+                        <a class="lf-sblg-promo" href="lifetime.html">
+                            <img src="assets/imgs/blog-promo-lifetime.png" alt="Get lifetime access for &pound;71">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ---- Row 2 ---- -->
+                <div class="row g-4 g-lg-5 mt-0">
+                    <div class="col-12 col-lg-8">
+                        <!-- DYNAMIC: the_content() -->
+                        <div class="lf-rich">
+                        <h2 id="lf-content-1">Can You Reheat Cooked Prawns From the Fridge?</h2>
+                        <p>
+                            Yes, you can reheat cooked prawns from the fridge, provided they were cooled and
+                            refrigerated within two hours of cooking, kept below 5&deg;C, and eaten within 48
+                            hours. When reheating, prawns must be heated until steaming hot throughout &mdash;
+                            ideally reaching a core temperature of at least 70&deg;C for two minutes, or
+                            74&deg;C if you are using a food thermometer. They should only be reheated once.
+                        </p>
+                        <p>
+                            This is not a blanket &ldquo;yes&rdquo; though. Cooked prawns are a ready-to-eat,
+                            high-risk food, which means bacteria can multiply on them relatively quickly if
+                            they are left in the wrong conditions. The FSA position on leftovers is that food
+                            cooled and refrigerated properly can be reheated safely, as long as it is done
+                            thoroughly and only once.
+                        </p>
+
+                        <h3>Three things to check first</h3>
+                        <ul>
+                            <li>They were cooled and refrigerated within two hours of cooking, or of purchase for shop-bought pre-cooked prawns.</li>
+                            <li>They have been stored at 8&deg;C or below (ideally 5&deg;C or below) and used within roughly two days.</li>
+                            <li>They show no signs of spoilage &mdash; no sour smell, sliminess, or discolouration.</li>
+                        </ul>
+
+                        <h2 id="lf-content-2">How Long Can Cooked Prawns Stay in the Fridge?</h2>
+                        <p>
+                            Cooked prawns typically last around two days in the fridge when stored at 8&deg;C or
+                            below, and ideally at 5&deg;C or below. This applies to both homemade cooked prawns
+                            and pre-cooked prawns bought from a supermarket once the pack has been opened.
+                            Always check the use-by date on shop-bought products, as this takes priority over
+                            general storage guidance.
+                        </p>
+
+                        <table>
+                            <thead>
+                                <tr><th>Storage</th><th>Temperature</th><th>Keeps for</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Fridge, covered</td><td>0&ndash;5&deg;C</td><td>Up to 2 days</td></tr>
+                                <tr><td>Freezer</td><td>&minus;18&deg;C</td><td>Up to 3 months</td></tr>
+                                <tr><td>Room temperature</td><td>Above 8&deg;C</td><td>Not safe over 2 hours</td></tr>
+                            </tbody>
+                        </table>
+
+                        <blockquote>
+                            If in doubt, throw it out. Reheating cannot undo spoilage that has already started.
+                        </blockquote>
+
+                        <h2 id="lf-content-3">Best Method to Reheat Cooked Prawns</h2>
+                        <p>
+                            If your prawns are part of a larger dish, our companion guide,
+                            <!-- DYNAMIC: internal link -->
+                            <a href="#">Can You Reheat Prawns? The Complete Guide</a>, covers reheating prawns
+                            in curries, stir-fries and pasta bakes in more depth.
+                        </p>
+                        <ol>
+                            <li>Take the prawns out of the fridge and pat them dry.</li>
+                            <li>Heat gently in a pan over a medium heat, turning often.</li>
+                            <li>Check the core temperature reaches 70&deg;C for two minutes.</li>
+                            <li>Serve straight away &mdash; do not reheat a second time.</li>
+                        </ol>
+                        </div>
+
+                        <!-- PLACEHOLDER: marks unfinished copy in the design -->
+                        <h2 class="lf-sblg-more">Text Goes On</h2>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <nav class="lf-sblg-toc" aria-labelledby="lfTocTitle">
+                            <h2 class="lf-sblg-toc-head" id="lfTocTitle"><i class="bi bi-list"></i> Table Of Contents</h2>
+                            <!-- LOOP START: heading -->
+                            <ul class="lf-sblg-toc-list">
+                                <li><a class="lf-sblg-toc-link active" href="#lf-content-1">Content Name</a></li>
+                                <li><a class="lf-sblg-toc-link" href="#lf-content-2">Content Name</a></li>
+                                <li><a class="lf-sblg-toc-link" href="#lf-content-3">Content Name</a></li>
+                                <li><a class="lf-sblg-toc-link" href="#lf-content-4">Content Name</a></li>
+                                <li><a class="lf-sblg-toc-link" href="#lf-content-5">Content Name</a></li>
+                                <li><a class="lf-sblg-toc-link" href="#lf-content-6">Content Name</a></li>
+                                <li><a class="lf-sblg-toc-link" href="#lf-content-7">Content Name</a></li>
+                                <li><a class="lf-sblg-toc-link" href="#lf-content-8">Content Name</a></li>
+                                <li><a class="lf-sblg-toc-link" href="#lf-content-9">Content Name</a></li>
+                                <li><a class="lf-sblg-toc-link" href="#lf-content-10">Content Name</a></li>
+                            </ul>
+                            <!-- LOOP END -->
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================
+        FOOTER
+        abbr: lf-footer
+    ============================================ -->
+    <footer class="lf-section lf-footer lf-bg-purple">
+        <div class="lf-container">
+            <div class="row gy-5">
+
+                <div class="col-12 col-lg-4 col-xl-3">
+                    <!-- DYNAMIC: home_url() -->
+                    <!-- The mark is a traced placeholder — swap for the real logo file. -->
+                    <a class="lf-footer-logo" href="home.html">
+                        <svg class="lf-footer-logo-mark" viewBox="0 0 213 238" aria-hidden="true" focusable="false">
+                            <path fill="currentColor" d="M0 65 28 29v139l37 33V108h25v129A119 119 0 0 1 0 173Z"/>
+                            <path fill="currentColor" d="M110 0a119 119 0 0 1 95 52l-24 16a91 91 0 0 0-43-34v69h67v30h-67v101l-28 4Z"/>
+                        </svg>
+                        <span class="lf-footer-logo-text">
+                            <span class="lf-footer-logo-name">Learning Facility</span>
+                            <span class="lf-footer-logo-tagline">Your key to lifelong learning</span>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="col-md-6 col-lg-4 col-xl-3" aria-labelledby="lfFooterTermsTitle">
+                    <h2 class="lf-footer-title" id="lfFooterTermsTitle">Our Terms</h2>
+                    <!-- DYNAMIC: wp_nav_menu( footer-terms ) -->
+                    <ul class="lf-footer-links">
+                        <li><a class="lf-footer-link" href="#">Terms and Conditions</a></li>
+                        <li><a class="lf-footer-link" href="#">Privacy Policy</a></li>
+                        <li><a class="lf-footer-link" href="#">Disclaimer</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="col-md-6 col-lg-4 col-xl-3" aria-labelledby="lfFooterLinksTitle">
+                    <h2 class="lf-footer-title" id="lfFooterLinksTitle">Important Links</h2>
+                    <!-- DYNAMIC: wp_nav_menu( footer-links ) -->
+                    <ul class="lf-footer-links">
+                        <li><a class="lf-footer-link" href="#">Contact</a></li>
+                        <li><a class="lf-footer-link" href="blog.html">Blogs</a></li>
+                        <li><a class="lf-footer-link" href="#">Certificate Order</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

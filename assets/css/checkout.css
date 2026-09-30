@@ -1,0 +1,85 @@
+/* ============================================
+    CHECKOUT
+    Page sections: lf-chk-form (contact, billing, payment, terms),
+    lf-chk-summary (order summary).
+    Shared blocks: lf-totals (totals.css), lf-field (forms.css).
+    Universal section used here: lf-accri.
+
+    NO PDF for this page — layout is my judgment, copy is from Canva.
+    The design draws the card fields as graphics; they are real inputs
+    here so the theme dev can swap in the WooCommerce payment fields.
+============================================ */
+
+.lf-chk-block {
+    margin-bottom: 2.5rem;
+}
+
+.lf-chk-block:last-child {
+    margin-bottom: 0;
+}
+
+.lf-chk-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.lf-chk-title {
+    margin-bottom: 0;
+    color: var(--lf-ink);
+    font-size: 1.25rem;
+}
+
+.lf-chk-login {
+    color: var(--lf-purple);
+    font-size: var(--lf-fs-sm);
+    font-weight: 700;
+}
+
+.lf-chk-login:hover {
+    text-decoration: underline;
+}
+
+.lf-chk-terms {
+    margin-top: 1.5rem;
+}
+
+.lf-chk-privacy {
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-xs);
+    line-height: 1.7;
+}
+
+.lf-chk-privacy a {
+    color: var(--lf-purple);
+    text-decoration: underline;
+}
+
+.lf-chk-submit {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.lf-chk-summary {
+    padding: 1.5rem;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+}
+
+.lf-chk-summary-title {
+    margin-bottom: 1rem;
+    color: var(--lf-ink);
+    font-size: 1.25rem;
+}
+
+@media (min-width: 992px) {
+    .lf-chk-summary-inner {
+        position: sticky;
+        top: 1.5rem;
+    }
+}

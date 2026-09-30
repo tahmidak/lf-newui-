@@ -1,0 +1,169 @@
+/* ============================================
+    REVIEWS
+    abbr: lf-rev
+    Universal. Home, Hot Deals, Single Course, Lifetime.
+
+    Rating box outside the cards on the left, Swiper slider on the right:
+    3 cards at lg, 1 on mobile — the design's own counts. Swiper 11 does
+    the work; Bootstrap's carousel cannot show three cards and step by one.
+    Stars are the shared lf-stars component (stars.css).
+============================================ */
+
+.lf-rev-row {
+    display: flex;
+    align-items: stretch;
+    gap: 1.25rem;
+    margin-top: 1.75rem;
+}
+
+/* ---- Rating box ---------------------------------------------------- */
+.lf-rev-score {
+    display: flex;
+    flex: 0 0 15rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.75rem 1.25rem;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+    text-align: center;
+}
+
+.lf-rev-score-title {
+    margin-bottom: 0.625rem;
+    color: var(--lf-ink);
+    font-size: 1.375rem;
+}
+
+.lf-rev-score-stars {
+    margin-bottom: 0.625rem;
+}
+
+.lf-rev-score-avg {
+    margin-bottom: 0.25rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-rev-score-count {
+    margin-bottom: 1rem;
+    color: var(--lf-grey-muted);
+    font-size: var(--lf-fs-sm);
+    font-style: italic;
+}
+
+.lf-rev-score-logo {
+    width: 7rem;
+    height: auto;
+}
+
+/* ---- Slider -------------------------------------------------------- */
+.lf-rev-slider {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+.lf-rev-swiper {
+    flex: 1;
+    min-width: 0;
+}
+
+.lf-rev-swiper .swiper-slide {
+    display: flex;
+    height: auto;
+}
+
+.lf-rev-nav {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-white);
+    color: var(--lf-purple);
+    box-shadow: 0 2px 10px rgba(36, 22, 65, 0.12);
+    font-size: 1.125rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* The chevrons are drawn heavier than Bootstrap Icons' default stroke */
+.lf-rev-nav i {
+    -webkit-text-stroke: 1.25px currentColor;
+}
+
+.lf-rev-nav:hover {
+    background-color: var(--lf-purple);
+    color: var(--lf-white);
+}
+
+.lf-rev-nav:disabled {
+    opacity: 0.4;
+}
+
+/* ---- Review card --------------------------------------------------- */
+.lf-rev-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+}
+
+.lf-rev-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.625rem;
+}
+
+.lf-rev-name {
+    color: var(--lf-ink);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.lf-rev-verified {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.875rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+    font-weight: 600;
+}
+
+.lf-rev-verified i {
+    color: var(--lf-purple);
+    font-size: 1.125rem;
+}
+
+.lf-rev-quote {
+    margin-bottom: 0;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+    font-style: italic;
+    line-height: 1.7;
+}
+
+@media (max-width: 991.98px) {
+    .lf-rev-row {
+        flex-wrap: wrap;
+    }
+
+    .lf-rev-score {
+        flex: 1 1 100%;
+    }
+
+    .lf-rev-slider {
+        flex: 1 1 100%;
+    }
+}

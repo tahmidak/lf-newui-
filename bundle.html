@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Bundle - Learning Facility</title>
+
+    <!-- Fonts: Lato (UI/body), Open Sans (logo wordmark) — see tokens.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ============================================
+        HEADER
+        abbr: lf-header
+        Bootstrap JS doing real work here:
+        - offcanvas: the mobile menu (#lfHeaderMenu)
+        - collapse:  the mobile search row (#lfHeaderSearch)
+    ============================================ -->
+    <header class="lf-header" data-lf-header>
+        <nav class="navbar navbar-expand-lg lf-header-bar" aria-label="Main">
+            <div class="lf-container d-flex flex-wrap flex-lg-nowrap align-items-center">
+
+                <!-- DYNAMIC: home_url() -->
+                <!-- The mark is a traced placeholder — swap for the real logo file. -->
+                <a class="lf-header-logo" href="home.html">
+                    <svg class="lf-header-logo-mark" viewBox="0 0 213 238" aria-hidden="true" focusable="false">
+                        <path fill="currentColor" d="M0 65 28 29v139l37 33V108h25v129A119 119 0 0 1 0 173Z"/>
+                        <path fill="currentColor" d="M110 0a119 119 0 0 1 95 52l-24 16a91 91 0 0 0-43-34v69h67v30h-67v101l-28 4Z"/>
+                    </svg>
+                    <span class="lf-header-logo-text">
+                        <span class="lf-header-logo-name">Learning Facility</span>
+                        <span class="lf-header-logo-tagline">Your key to lifelong learning</span>
+                    </span>
+                </a>
+
+                <!-- Search: always visible from lg; a collapse row below lg -->
+                <div class="collapse d-lg-block order-last order-lg-0 lf-header-search" id="lfHeaderSearch">
+                    <!-- DYNAMIC: action = home_url('/'), post_type = Tutor LMS courses -->
+                    <form class="lf-search" role="search" action="#" method="get">
+                        <label class="visually-hidden" for="lfHeaderSearchInput">Search courses</label>
+                        <input class="lf-search-input" id="lfHeaderSearchInput" type="search" name="s" placeholder="Search Courses ...">
+                        <input type="hidden" name="post_type" value="courses">
+                        <button class="lf-search-btn" type="submit" aria-label="Search"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Nav: inline from lg; an offcanvas panel below lg -->
+                <div class="offcanvas offcanvas-top lf-header-menu" id="lfHeaderMenu" tabindex="-1" aria-label="Main menu" data-lf-header-menu>
+                    <div class="offcanvas-body">
+                        <!-- DYNAMIC: wp_nav_menu( primary ) — one <li> per menu item -->
+                        <ul class="navbar-nav ms-lg-auto lf-header-nav">
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link" href="home.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link lf-header-link-hot" href="hot-deals.html">Hot Deals<span aria-hidden="true">🔥</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link" href="courses.html">All Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <!-- DYNAMIC: login / dashboard link depending on is_user_logged_in() -->
+                                <a class="nav-link lf-header-link" href="#">Log In/Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center ms-auto lf-header-actions">
+                    <button class="lf-header-icon-btn d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#lfHeaderSearch" aria-controls="lfHeaderSearch" aria-expanded="false" aria-label="Search courses">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <circle cx="10.5" cy="10.5" r="7"/>
+                            <path d="m15.75 15.75 5.25 5.25"/>
+                        </svg>
+                    </button>
+
+                    <!-- DYNAMIC: wc_get_cart_url() -->
+                    <a class="lf-header-icon-btn" href="cart.html" aria-label="Cart">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                            <path d="M1.5 2.5h2.75l2.5 12.5h12.5l2.5-9H5.5"/>
+                            <circle cx="9" cy="19.75" r="1.75"/>
+                            <circle cx="17" cy="19.75" r="1.75"/>
+                        </svg>
+                    </a>
+
+                    <button class="lf-header-icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#lfHeaderMenu" aria-controls="lfHeaderMenu" aria-expanded="false" aria-label="Menu">
+                        <svg class="lf-header-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <path d="M3 5h18M3 12h18M3 19h18"/>
+                        </svg>
+                        <svg class="lf-header-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <path d="M5 5l14 14M19 5 5 19"/>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ============================================
+            BUNDLE HERO — lf-sb-hi
+            Copy + hero image left, one sticky pricing card right. The
+            floating CTA takes over once the in-page CTAs scroll away
+            (assets/js/bundle-cta.js).
+        ============================================ -->
+        <section class="lf-section lf-sb-hi">
+            <div class="lf-container">
+                <div class="row g-4 g-lg-5">
+                    <div class="col-12 col-lg-8">
+                        <div class="lf-sb-hi-badges">
+                            <!-- DYNAMIC: course count / bundle level -->
+                            <span class="lf-sb-hi-badge">16 Courses in 1 Bundle</span>
+                            <span class="lf-sb-hi-level">Safeguarding Level 3</span>
+                        </div>
+
+                        <!-- DYNAMIC: bundle title -->
+                        <h1 class="lf-sb-hi-header">Become a Certified<br>Safeguarding Professional</h1>
+                        <p class="lf-sb-hi-text">
+                            Master essential safeguarding skills with 16 professional courses, CPD
+                            certification, and lifetime access designed to accelerate your career.
+                        </p>
+
+                        <div class="lf-sb-hi-btns" data-lf-cta-trigger>
+                            <a class="btn lf-btn lf-btn-primary" href="cart.html">Start Your Career Upgrade</a>
+                            <a class="btn lf-btn lf-btn-outline" href="#lf-bundle-courses">View Bundle Details</a>
+                        </div>
+
+                        <img class="lf-sb-hi-img" src="assets/imgs/bundle-hero.jpg" alt="">
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <!-- DYNAMIC: bundle price and contents -->
+                        <div class="lf-sb-price" data-lf-cta-trigger>
+                            <p class="lf-sb-price-top">
+                                <span class="lf-sb-price-was">&pound;500</span>
+                                <span class="lf-sb-price-now">&pound;39</span>
+                            </p>
+                            <p class="lf-sb-price-save">Save Over <strong>90%</strong> &middot; Today</p>
+
+                            <ul class="lf-sb-price-list">
+                                <li><i class="bi bi-check-lg"></i> Lifetime Access</li>
+                                <li><i class="bi bi-check-lg"></i> CPD certified courses</li>
+                                <li><i class="bi bi-check-lg"></i> Instant certificates</li>
+                                <li><i class="bi bi-check-lg"></i> Learn anytime</li>
+                            </ul>
+
+                            <p class="lf-sb-price-guarantee"><i class="bi bi-arrow-counterclockwise"></i> 14-Day Money-Back Guarantee</p>
+                            <a class="btn lf-btn lf-btn-primary lf-sb-price-btn" href="cart.html">Take This Bundle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            CAREER ROADMAP — lf-sb-road
+        ============================================ -->
+        <section class="lf-section pt-0 lf-sb-road">
+            <div class="lf-container text-center">
+                <h2 class="lf-sec-header">Your Career Roadmap</h2>
+                <p class="lf-txt-sm lf-text-grey mb-4">Progress through three essential stages to achieve professional excellence</p>
+
+                <div class="row g-4 text-center">
+                        <div class="col-12 col-md-4">
+                            <div class="lf-sb-road-card">
+                                <span class="lf-sb-road-num">01</span>
+                                <h3 class="lf-sb-road-title">Foundation</h3>
+                                <p class="lf-sb-road-text">Build essential safeguarding knowledge</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="lf-sb-road-card">
+                                <span class="lf-sb-road-num">02</span>
+                                <h3 class="lf-sb-road-title">Professional Skills</h3>
+                                <p class="lf-sb-road-text">Develop workplace-ready expertise</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="lf-sb-road-card">
+                                <span class="lf-sb-road-num">03</span>
+                                <h3 class="lf-sb-road-title">Career Ready</h3>
+                                <p class="lf-sb-road-text">Unlock new opportunities</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            COURSES IN THE BUNDLE — lf-sb-crs
+            All 16 ride in a Swiper (assets/js/bundle-slider.js).
+            Hook: data-lf-bundle-slider.
+        ============================================ -->
+        <section class="lf-section pt-0 lf-sb-crs" id="lf-bundle-courses">
+            <div class="lf-container text-center">
+                <h2 class="lf-sec-header">The Courses You Will Get</h2>
+                <p class="lf-txt-sm lf-text-grey mb-4">16 comprehensive professional courses designed for career transformation</p>
+
+                <div class="lf-sb-crs-slider" data-lf-bundle-slider>
+                    <div class="swiper lf-sb-crs-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level">Intermediate</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level lf-sb-crs-level-beginner">Beginner</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level lf-sb-crs-level-advanced">Advanced</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level lf-sb-crs-level-all">All levels</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level">Intermediate</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level lf-sb-crs-level-beginner">Beginner</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level">Intermediate</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level lf-sb-crs-level-advanced">Advanced</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level">Intermediate</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level lf-sb-crs-level-beginner">Beginner</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level lf-sb-crs-level-all">All levels</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level">Intermediate</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level lf-sb-crs-level-beginner">Beginner</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level">Intermediate</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level lf-sb-crs-level-advanced">Advanced</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- LOOP START: bundle course -->
+                                <article class="lf-sb-crs-card">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-sb-crs-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <div class="lf-sb-crs-body">
+                                        <h3 class="lf-sb-crs-title">
+                                            <!-- DYNAMIC: course_title -->
+                                            Certificate in Sterile Services
+                                        </h3>
+                                        <div class="lf-sb-crs-meta">
+                                            <!-- DYNAMIC: level / duration -->
+                                            <span class="lf-sb-crs-level">Intermediate</span>
+                                            <span class="lf-sb-crs-time">4h</span>
+                                        </div>
+                                    </div>
+                                </article>
+                                <!-- LOOP END -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-3 mt-4">
+                        <button class="lf-sb-crs-nav" type="button" data-lf-bundle-prev aria-label="Previous courses"><i class="bi bi-chevron-left"></i></button>
+                        <button class="lf-sb-crs-nav" type="button" data-lf-bundle-next aria-label="Next courses"><i class="bi bi-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <hr class="lf-hr mt-5">
+            </div>
+        </section>
+
+        <!-- ============================================
+            CAREER PATHWAY — lf-sb-path
+        ============================================ -->
+        <section class="lf-section pt-0 lf-sb-path">
+            <div class="lf-container text-center">
+                <h2 class="lf-sec-header">Your Career Pathway</h2>
+
+                <!-- LOOP START: pathway stage -->
+                <ul class="lf-sb-path-list">
+                    <li class="lf-sb-path-item">
+                        <span class="lf-sb-path-num">1</span>
+                        <span class="lf-sb-path-label">Safeguarding Learner</span>
+                    </li>
+                    <li class="lf-sb-path-item">
+                        <span class="lf-sb-path-num">2</span>
+                        <span class="lf-sb-path-label">Support Worker</span>
+                    </li>
+                    <li class="lf-sb-path-item">
+                        <span class="lf-sb-path-num">3</span>
+                        <span class="lf-sb-path-label">Care Coordinator</span>
+                    </li>
+                    <li class="lf-sb-path-item">
+                        <span class="lf-sb-path-num">4</span>
+                        <span class="lf-sb-path-label">Safeguarding Officer</span>
+                    </li>
+                    <li class="lf-sb-path-item">
+                        <span class="lf-sb-path-num">5</span>
+                        <span class="lf-sb-path-label">Leadership Roles</span>
+                    </li>
+                </ul>
+                <!-- LOOP END -->
+            </div>
+        </section>
+
+        <!-- ============================================
+            ACCREDITATION — universal (lf-accri)
+            One flat badge list: a CSS grid from lg, an auto-scrolling
+            swipeable strip below it (assets/js/accri.js builds and tears
+            down the Swiper at the breakpoint). Closed top and bottom by
+            a rule, as drawn.
+        ============================================ -->
+        <section class="lf-accri">
+            <div class="lf-container">
+                <hr class="lf-hr">
+
+                <div class="lf-section">
+                    <p class="lf-eyebrow">Quality you can trust</p>
+                    <h2 class="lf-sec-header">Our courses are Trusted by</h2>
+
+                    <div class="lf-accri-slider">
+                        <div class="swiper lf-accri-swiper" data-lf-accri>
+                            <!-- DYNAMIC: accreditation badges -->
+                            <!-- LOOP START: accreditation badge -->
+                            <div class="swiper-wrapper lf-accri-row">
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-ioas.png" alt="IOAS High Quality Assurance"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-aoht.png" alt="AoHT Member"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-disability-confident.png" alt="Disability Confident Committed"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-cpd-provider.png" alt="CPD Accredited Provider"></div>
+                            <div class="swiper-slide lf-accri-card lf-accri-card-featured"><img src="assets/imgs/badge-cpd-international.png" alt="CPD International Quality"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-14-days.png" alt="14 Days Money Back Guarantee"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-lifetime-access.png" alt="Lifetime Access"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-incensu.png" alt="Incensu Registered"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-ssl.png" alt="SSL Secure"></div>
+                            </div>
+                            <!-- LOOP END -->
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="lf-hr">
+            </div>
+        </section>
+
+        <!-- ============================================
+            VALUE COMPARISON — lf-sb-cmp
+        ============================================ -->
+        <section class="lf-section lf-sb-cmp">
+            <div class="lf-container text-center">
+                <h2 class="lf-sec-header mb-4">Premium Value Comparison</h2>
+
+                <div class="lf-sb-cmp-grid">
+                    <div class="lf-sb-cmp-box">
+                        <h3 class="lf-sb-cmp-title">Individual Courses</h3>
+                        <ul class="lf-sb-cmp-list">
+                            <li><i class="bi bi-dot"></i> 16 Courses</li>
+                            <li><i class="bi bi-dot"></i> Average Course Price: &pound;30-&pound;50 Each</li>
+                        </ul>
+                        <p class="lf-sb-cmp-total">Total: <strong>&pound;500+</strong></p>
+                    </div>
+
+                    <div class="lf-sb-cmp-box lf-sb-cmp-box-featured">
+                        <h3 class="lf-sb-cmp-title">Career Bundle</h3>
+                        <ul class="lf-sb-cmp-list">
+                            <li><i class="bi bi-check-lg"></i> 16 Courses</li>
+                            <li><i class="bi bi-check-lg"></i> Lifetime Access</li>
+                        </ul>
+                        <p class="lf-sb-cmp-price">Just &pound;39</p>
+                        <p class="lf-sb-cmp-save">Save over 90%</p>
+                        <!-- Design reads "aDD tO cART" — a casing error, fixed here -->
+                        <span data-lf-cta-trigger>
+                            <a class="btn lf-btn lf-btn-primary lf-sb-price-btn" href="cart.html">Add to Cart</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            STATS STRIP — lf-sb-stats
+        ============================================ -->
+        <section class="lf-section pt-0 lf-sb-stats">
+            <div class="lf-container">
+                <div class="lf-sb-stats-box">
+                    <div class="row g-4">
+                        <div class="col-6 col-lg-3">
+                            <p class="lf-sb-stats-val">4.9</p>
+                            <p class="lf-sb-stats-stars"><span class="lf-stars lf-stars-amber lf-stars-sm" style="--lf-stars-fill: 98%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span></p>
+                            <p class="lf-sb-stats-label">Learner Rating</p>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <p class="lf-sb-stats-val">10k+</p>
+                            <p class="lf-sb-stats-label">Learner Trained</p>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <p class="lf-sb-stats-val">16</p>
+                            <p class="lf-sb-stats-label">Professional Courses</p>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <p class="lf-sb-stats-val">&infin;</p>
+                            <p class="lf-sb-stats-label">Lifetime Access</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            FLOATING CTA — lf-sb-float
+            Slides in once every CTA above has scrolled out of view, and
+            slides back out the same way.
+        ============================================ -->
+        <aside class="lf-sb-float" data-lf-cta="desktop" aria-label="Bundle purchase">
+            <div class="lf-sb-float-card">
+                <p class="lf-sb-float-title">Safeguarding Level 3</p>
+                <p class="lf-sb-float-rating"><span class="lf-stars lf-stars-amber lf-stars-sm" style="--lf-stars-fill: 98%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span> 4.9</p>
+                <p class="lf-sb-price-top">
+                    <span class="lf-sb-price-was">&pound;500</span>
+                    <span class="lf-sb-price-now">&pound;39</span>
+                </p>
+                <p class="lf-sb-price-guarantee"><i class="bi bi-arrow-counterclockwise"></i> 14-Day Money-Back Guarantee</p>
+                <a class="btn lf-btn lf-btn-primary lf-sb-price-btn" href="cart.html">Enroll Now</a>
+            </div>
+        </aside>
+
+        <aside class="lf-sb-float-phone" data-lf-cta="phone" aria-label="Bundle purchase">
+            <div class="lf-sb-float-phone-inner">
+                <div>
+                    <p class="lf-sb-float-phone-title">Safeguarding Career Bundle</p>
+                    <p class="lf-sb-float-phone-price">&pound;39</p>
+                </div>
+                <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="cart.html">Enroll Now</a>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- ============================================
+        FOOTER
+        abbr: lf-footer
+    ============================================ -->
+    <footer class="lf-section lf-footer lf-bg-purple">
+        <div class="lf-container">
+            <div class="row gy-5">
+
+                <div class="col-12 col-lg-4 col-xl-3">
+                    <!-- DYNAMIC: home_url() -->
+                    <!-- The mark is a traced placeholder — swap for the real logo file. -->
+                    <a class="lf-footer-logo" href="home.html">
+                        <svg class="lf-footer-logo-mark" viewBox="0 0 213 238" aria-hidden="true" focusable="false">
+                            <path fill="currentColor" d="M0 65 28 29v139l37 33V108h25v129A119 119 0 0 1 0 173Z"/>
+                            <path fill="currentColor" d="M110 0a119 119 0 0 1 95 52l-24 16a91 91 0 0 0-43-34v69h67v30h-67v101l-28 4Z"/>
+                        </svg>
+                        <span class="lf-footer-logo-text">
+                            <span class="lf-footer-logo-name">Learning Facility</span>
+                            <span class="lf-footer-logo-tagline">Your key to lifelong learning</span>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="col-md-6 col-lg-4 col-xl-3" aria-labelledby="lfFooterTermsTitle">
+                    <h2 class="lf-footer-title" id="lfFooterTermsTitle">Our Terms</h2>
+                    <!-- DYNAMIC: wp_nav_menu( footer-terms ) -->
+                    <ul class="lf-footer-links">
+                        <li><a class="lf-footer-link" href="#">Terms and Conditions</a></li>
+                        <li><a class="lf-footer-link" href="#">Privacy Policy</a></li>
+                        <li><a class="lf-footer-link" href="#">Disclaimer</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="col-md-6 col-lg-4 col-xl-3" aria-labelledby="lfFooterLinksTitle">
+                    <h2 class="lf-footer-title" id="lfFooterLinksTitle">Important Links</h2>
+                    <!-- DYNAMIC: wp_nav_menu( footer-links ) -->
+                    <ul class="lf-footer-links">
+                        <li><a class="lf-footer-link" href="#">Contact</a></li>
+                        <li><a class="lf-footer-link" href="blog.html">Blogs</a></li>
+                        <li><a class="lf-footer-link" href="#">Certificate Order</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/js/bundle-slider.js"></script>
+    <script src="assets/js/bundle-cta.js"></script>
+    <script src="assets/js/accri.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifetime Membership - Learning Facility</title>
+
+    <!-- Fonts: Lato (UI/body), Open Sans (logo wordmark) — see tokens.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ============================================
+        HEADER
+        abbr: lf-header
+        Bootstrap JS doing real work here:
+        - offcanvas: the mobile menu (#lfHeaderMenu)
+        - collapse:  the mobile search row (#lfHeaderSearch)
+    ============================================ -->
+    <header class="lf-header" data-lf-header>
+        <nav class="navbar navbar-expand-lg lf-header-bar" aria-label="Main">
+            <div class="lf-container d-flex flex-wrap flex-lg-nowrap align-items-center">
+
+                <!-- DYNAMIC: home_url() -->
+                <!-- The mark is a traced placeholder — swap for the real logo file. -->
+                <a class="lf-header-logo" href="home.html">
+                    <svg class="lf-header-logo-mark" viewBox="0 0 213 238" aria-hidden="true" focusable="false">
+                        <path fill="currentColor" d="M0 65 28 29v139l37 33V108h25v129A119 119 0 0 1 0 173Z"/>
+                        <path fill="currentColor" d="M110 0a119 119 0 0 1 95 52l-24 16a91 91 0 0 0-43-34v69h67v30h-67v101l-28 4Z"/>
+                    </svg>
+                    <span class="lf-header-logo-text">
+                        <span class="lf-header-logo-name">Learning Facility</span>
+                        <span class="lf-header-logo-tagline">Your key to lifelong learning</span>
+                    </span>
+                </a>
+
+                <!-- Search: always visible from lg; a collapse row below lg -->
+                <div class="collapse d-lg-block order-last order-lg-0 lf-header-search" id="lfHeaderSearch">
+                    <!-- DYNAMIC: action = home_url('/'), post_type = Tutor LMS courses -->
+                    <form class="lf-search" role="search" action="#" method="get">
+                        <label class="visually-hidden" for="lfHeaderSearchInput">Search courses</label>
+                        <input class="lf-search-input" id="lfHeaderSearchInput" type="search" name="s" placeholder="Search Courses ...">
+                        <input type="hidden" name="post_type" value="courses">
+                        <button class="lf-search-btn" type="submit" aria-label="Search"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Nav: inline from lg; an offcanvas panel below lg -->
+                <div class="offcanvas offcanvas-top lf-header-menu" id="lfHeaderMenu" tabindex="-1" aria-label="Main menu" data-lf-header-menu>
+                    <div class="offcanvas-body">
+                        <!-- DYNAMIC: wp_nav_menu( primary ) — one <li> per menu item -->
+                        <ul class="navbar-nav ms-lg-auto lf-header-nav">
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link" href="home.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link lf-header-link-hot" href="hot-deals.html">Hot Deals<span aria-hidden="true">🔥</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link" href="courses.html">All Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <!-- DYNAMIC: login / dashboard link depending on is_user_logged_in() -->
+                                <a class="nav-link lf-header-link" href="#">Log In/Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center ms-auto lf-header-actions">
+                    <button class="lf-header-icon-btn d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#lfHeaderSearch" aria-controls="lfHeaderSearch" aria-expanded="false" aria-label="Search courses">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <circle cx="10.5" cy="10.5" r="7"/>
+                            <path d="m15.75 15.75 5.25 5.25"/>
+                        </svg>
+                    </button>
+
+                    <!-- DYNAMIC: wc_get_cart_url() -->
+                    <a class="lf-header-icon-btn" href="cart.html" aria-label="Cart">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                            <path d="M1.5 2.5h2.75l2.5 12.5h12.5l2.5-9H5.5"/>
+                            <circle cx="9" cy="19.75" r="1.75"/>
+                            <circle cx="17" cy="19.75" r="1.75"/>
+                        </svg>
+                    </a>
+
+                    <button class="lf-header-icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#lfHeaderMenu" aria-controls="lfHeaderMenu" aria-expanded="false" aria-label="Menu">
+                        <svg class="lf-header-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <path d="M3 5h18M3 12h18M3 19h18"/>
+                        </svg>
+                        <svg class="lf-header-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <path d="M5 5l14 14M19 5 5 19"/>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ============================================
+            HERO — lf-lt-hi
+            Plan card is artwork in a link; the ring in the corner is a
+            pseudo-element (lifetime.css).
+        ============================================ -->
+        <section class="lf-section lf-lt-hi lf-bg-night">
+            <div class="lf-container">
+                <div class="row align-items-center g-4 g-lg-5">
+                    <div class="col-12 col-lg-7">
+                        <p class="lf-eyebrow lf-eyebrow-white">Learn without limits</p>
+                        <h1 class="lf-band-header lf-lt-hi-header">Get access to all courses Lifetime!</h1>
+                        <p class="lf-lt-hi-text">
+                            Get unlimited access to 900+ professional courses, certificates and every
+                            new course we release — without recurring fees.
+                        </p>
+                    </div>
+
+                    <div class="col-12 col-lg-5">
+                        <!-- DYNAMIC: plan artwork + link -->
+                        <a class="lf-lt-hi-card" href="#">
+                            <img src="assets/imgs/lifetimectaplancard.png" alt="Lifetime Membership Plan — &pound;71, 90% off">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            MEMBERSHIP HIGHLIGHTS — lf-lt-hl
+        ============================================ -->
+        <section class="lf-section lf-lt-hl">
+            <div class="lf-container">
+                <div class="row g-4 g-lg-5">
+                    <div class="col-12 col-lg-5">
+                        <p class="lf-eyebrow">Membership highlights</p>
+                        <h2 class="lf-sec-header lf-lt-hl-header">A smarter way to keep growing.</h2>
+                        <p class="lf-lt-hl-text">
+                            From teaching and care to business and wellbeing, build practical skills
+                            with trusted courses designed for real life.
+                        </p>
+                        <a class="btn lf-btn lf-btn-primary" href="#">Start learning</a>
+                    </div>
+
+                    <div class="col-12 col-lg-7">
+                        <!-- LOOP START: membership highlight -->
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <div class="lf-lt-hl-item"><i class="bi bi-patch-check-fill"></i> Instant course access</div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="lf-lt-hl-item"><i class="bi bi-patch-check-fill"></i> Unlimited PDF certificates</div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="lf-lt-hl-item"><i class="bi bi-patch-check-fill"></i> Excellent expert support</div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="lf-lt-hl-item"><i class="bi bi-patch-check-fill"></i> CPD certified courses</div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="lf-lt-hl-item"><i class="bi bi-patch-check-fill"></i> All future courses included</div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="lf-lt-hl-item"><i class="bi bi-patch-check-fill"></i> Learn from anywhere</div>
+                            </div>
+                        </div>
+                        <!-- LOOP END -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            BENEFITS — lf-lt-ben
+        ============================================ -->
+        <section class="lf-section lf-lt-ben lf-bg-band">
+            <div class="lf-container text-center">
+                <p class="lf-eyebrow">Built for your momentum</p>
+                <h2 class="lf-sec-header lf-lt-ben-header">Learn more. Do more. Become more.</h2>
+
+                <div class="row g-4 text-start">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="lf-lt-ben-card">
+                            <h3 class="lf-lt-ben-title">Current courses</h3>
+                            <p class="lf-lt-ben-text">Explore a growing library of practical courses across professional and personal development.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="lf-lt-ben-card">
+                            <h3 class="lf-lt-ben-title">Future included</h3>
+                            <p class="lf-lt-ben-text">Your membership keeps working as new courses and learning opportunities are added.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="lf-lt-ben-card">
+                            <h3 class="lf-lt-ben-title">Proof of progress</h3>
+                            <p class="lf-lt-ben-text">Complete your learning and download certificates that showcase your commitment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            COURSE CATEGORIES — lf-lt-cat
+            Three rows show; the arrow opens the rest (assets/js/expand.js).
+        ============================================ -->
+        <section class="lf-section lf-lt-cat lf-bg-purple">
+            <div class="lf-container text-center">
+                <h2 class="lf-sec-header lf-lt-cat-header">Course Category</h2>
+
+                <div class="lf-expand lf-lt-cat-wrap" data-lf-expand>
+                    <!-- DYNAMIC: course category terms + course counts -->
+                    <!-- LOOP START: category chip -->
+                    <ul class="lf-lt-cat-list lf-expand-body" data-lf-expand-body>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                            <li><a class="lf-lt-cat-chip" href="courses.html">Accounting (7)</a></li>
+                    </ul>
+                    <!-- LOOP END -->
+
+                    <div class="lf-expand-center">
+                        <button class="lf-expand-toggle lf-expand-caret" type="button" data-lf-expand-toggle aria-expanded="false" aria-label="Show all categories">
+                            <i class="bi bi-caret-down-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            FAQ — universal (lf-faq)
+            Bootstrap accordion; one row open at a time via data-bs-parent.
+        ============================================ -->
+        <section class="lf-section lf-faq">
+            <div class="lf-container text-center">
+                <p class="lf-eyebrow">Need to know</p>
+                <h2 class="lf-sec-header">Frequently Asked Questions</h2>
+
+                <!-- LOOP START: faq row -->
+                <div class="accordion lf-faq-accordion text-start" id="lfFaqAccordion">
+                    <div class="accordion-item lf-faq-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button lf-faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#lfFaq1" aria-expanded="true" aria-controls="lfFaq1">
+                                Become a lifetime prime member?
+                            </button>
+                        </h3>
+                        <div class="accordion-collapse collapse show" id="lfFaq1" data-bs-parent="#lfFaqAccordion">
+                            <div class="accordion-body lf-faq-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item lf-faq-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button lf-faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lfFaq2" aria-expanded="false" aria-controls="lfFaq2">
+                                Become a lifetime prime member?
+                            </button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="lfFaq2" data-bs-parent="#lfFaqAccordion">
+                            <div class="accordion-body lf-faq-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item lf-faq-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button lf-faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lfFaq3" aria-expanded="false" aria-controls="lfFaq3">
+                                Become a lifetime prime member?
+                            </button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="lfFaq3" data-bs-parent="#lfFaqAccordion">
+                            <div class="accordion-body lf-faq-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item lf-faq-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button lf-faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lfFaq4" aria-expanded="false" aria-controls="lfFaq4">
+                                Become a lifetime prime member?
+                            </button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="lfFaq4" data-bs-parent="#lfFaqAccordion">
+                            <div class="accordion-body lf-faq-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- LOOP END -->
+            </div>
+        </section>
+
+        <!-- ============================================
+            HOW TO START — lf-lt-how
+        ============================================ -->
+        <section class="lf-section lf-lt-how lf-bg-band">
+            <div class="lf-container">
+                <h2 class="lf-sec-header lf-lt-how-header">How to Start</h2>
+
+                <div class="lf-lt-how-row">
+                    <div class="lf-lt-how-card">
+                        <img class="lf-lt-how-img" src="assets/imgs/lifetime-step-1.jpg" alt="">
+                        <h3 class="lf-lt-how-title">1. Purchase The Membership</h3>
+                        <ul class="lf-lt-how-list">
+                                <li>Pay once in a lifetime</li>
+                                <li>No hidden charge</li>
+                                <li>Login to your account and get instant access to our courses library</li>
+                        </ul>
+                    </div>
+                    <span class="lf-lt-how-step" aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+                    <div class="lf-lt-how-card">
+                        <img class="lf-lt-how-img" src="assets/imgs/lifetime-step-2.jpg" alt="">
+                        <h3 class="lf-lt-how-title">2. Start Learning</h3>
+                        <ul class="lf-lt-how-list">
+                                <li>Search for your preferable courses from 1500+ courses</li>
+                                <li>Start Learning from anywhere</li>
+                                <li>Take all the time you need to finish the course</li>
+                        </ul>
+                    </div>
+                    <span class="lf-lt-how-step" aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
+                    <div class="lf-lt-how-card">
+                        <img class="lf-lt-how-img" src="assets/imgs/lifetime-step-3.jpg" alt="">
+                        <h3 class="lf-lt-how-title">3. Get Certified</h3>
+                        <ul class="lf-lt-how-list">
+                                <li>Take notes while learning</li>
+                                <li>Complete tests</li>
+                                <li>And get your certificate and transcript instantly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            CLOSING CTA — lf-lt-cta
+        ============================================ -->
+        <section class="lf-section lf-lt-cta lf-bg-purple">
+            <div class="lf-container">
+                <h2 class="lf-band-header lf-lt-cta-header">Your next chapter starts here.</h2>
+                <p class="lf-lt-cta-text">Join Learning Facility once and keep building skills for a lifetime.</p>
+                <a class="btn lf-btn lf-btn-light" href="#">Get lifetime access</a>
+            </div>
+        </section>
+
+        <!-- ============================================
+            REVIEWS — universal (lf-rev)
+            Swiper 11 runs the slider (assets/js/reviews.js): 3 cards at lg,
+            1 on mobile — the counts the design draws. Hook: data-lf-rev.
+        ============================================ -->
+        <section class="lf-section lf-rev lf-bg-band">
+            <div class="lf-container">
+                <h2 class="lf-sec-header">What our students say</h2>
+
+                <div class="lf-rev-row">
+                    <!-- DYNAMIC: aggregate rating -->
+                    <div class="lf-rev-score">
+                        <p class="lf-rev-score-title">Excellent</p>
+                        <!-- 4.9 of 5 = 98%: four full stars and a fifth filled 90% -->
+                        <p class="lf-rev-score-stars"><span class="lf-stars lf-stars-lg" style="--lf-stars-fill: 98%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span></p>
+                        <p class="lf-rev-score-avg">4.9 average</p>
+                        <p class="lf-rev-score-count">158 Reviews</p>
+                        <img class="lf-rev-score-logo" src="assets/imgs/reviews-io-logo.png" alt="Reviews.io">
+                    </div>
+
+                    <div class="lf-rev-slider" data-lf-rev>
+                        <button class="lf-rev-nav" type="button" data-lf-rev-prev aria-label="Previous reviews">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+
+                        <div class="swiper lf-rev-swiper">
+                            <div class="swiper-wrapper">
+                                <!-- LOOP START: review card -->
+                                <div class="swiper-slide">
+                                    <article class="lf-rev-card">
+                                        <div class="lf-rev-card-head">
+                                            <!-- DYNAMIC: reviewer name -->
+                                            <span class="lf-rev-name">Taufiq Israil</span>
+                                            <!-- DYNAMIC: rating -> --lf-stars-fill (4.5/5 = 90%) -->
+                                            <span class="lf-stars" style="--lf-stars-fill: 90%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span>
+                                        </div>
+                                        <p class="lf-rev-verified"><i class="bi bi-patch-check-fill"></i> Verified Customer</p>
+                                        <!-- DYNAMIC: review body -->
+                                        <p class="lf-rev-quote">
+                                            "This course completely transformed how I approach design.
+                                            The section on design systems was worth the price alone. I
+                                            landed a Junior Designer role three weeks after finishing!"
+                                        </p>
+                                    </article>
+                                </div>
+                                <div class="swiper-slide">
+                                    <article class="lf-rev-card">
+                                        <div class="lf-rev-card-head">
+                                            <!-- DYNAMIC: reviewer name -->
+                                            <span class="lf-rev-name">Taufiq Israil</span>
+                                            <!-- DYNAMIC: rating -> --lf-stars-fill (4.5/5 = 90%) -->
+                                            <span class="lf-stars" style="--lf-stars-fill: 90%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span>
+                                        </div>
+                                        <p class="lf-rev-verified"><i class="bi bi-patch-check-fill"></i> Verified Customer</p>
+                                        <!-- DYNAMIC: review body -->
+                                        <p class="lf-rev-quote">
+                                            "This course completely transformed how I approach design.
+                                            The section on design systems was worth the price alone. I
+                                            landed a Junior Designer role three weeks after finishing!"
+                                        </p>
+                                    </article>
+                                </div>
+                                <div class="swiper-slide">
+                                    <article class="lf-rev-card">
+                                        <div class="lf-rev-card-head">
+                                            <!-- DYNAMIC: reviewer name -->
+                                            <span class="lf-rev-name">Taufiq Israil</span>
+                                            <!-- DYNAMIC: rating -> --lf-stars-fill (4.5/5 = 90%) -->
+                                            <span class="lf-stars" style="--lf-stars-fill: 90%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span>
+                                        </div>
+                                        <p class="lf-rev-verified"><i class="bi bi-patch-check-fill"></i> Verified Customer</p>
+                                        <!-- DYNAMIC: review body -->
+                                        <p class="lf-rev-quote">
+                                            "This course completely transformed how I approach design.
+                                            The section on design systems was worth the price alone. I
+                                            landed a Junior Designer role three weeks after finishing!"
+                                        </p>
+                                    </article>
+                                </div>
+                                <div class="swiper-slide">
+                                    <article class="lf-rev-card">
+                                        <div class="lf-rev-card-head">
+                                            <!-- DYNAMIC: reviewer name -->
+                                            <span class="lf-rev-name">Taufiq Israil</span>
+                                            <!-- DYNAMIC: rating -> --lf-stars-fill (4.5/5 = 90%) -->
+                                            <span class="lf-stars" style="--lf-stars-fill: 90%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span>
+                                        </div>
+                                        <p class="lf-rev-verified"><i class="bi bi-patch-check-fill"></i> Verified Customer</p>
+                                        <!-- DYNAMIC: review body -->
+                                        <p class="lf-rev-quote">
+                                            "This course completely transformed how I approach design.
+                                            The section on design systems was worth the price alone. I
+                                            landed a Junior Designer role three weeks after finishing!"
+                                        </p>
+                                    </article>
+                                </div>
+                                <!-- LOOP END -->
+                            </div>
+                        </div>
+
+                        <button class="lf-rev-nav" type="button" data-lf-rev-next aria-label="Next reviews">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================
+        FOOTER
+        abbr: lf-footer
+    ============================================ -->
+    <footer class="lf-section lf-footer lf-bg-purple">
+        <div class="lf-container">
+            <div class="row gy-5">
+
+                <div class="col-12 col-lg-4 col-xl-3">
+                    <!-- DYNAMIC: home_url() -->
+                    <!-- The mark is a traced placeholder — swap for the real logo file. -->
+                    <a class="lf-footer-logo" href="home.html">
+                        <svg class="lf-footer-logo-mark" viewBox="0 0 213 238" aria-hidden="true" focusable="false">
+                            <path fill="currentColor" d="M0 65 28 29v139l37 33V108h25v129A119 119 0 0 1 0 173Z"/>
+                            <path fill="currentColor" d="M110 0a119 119 0 0 1 95 52l-24 16a91 91 0 0 0-43-34v69h67v30h-67v101l-28 4Z"/>
+                        </svg>
+                        <span class="lf-footer-logo-text">
+                            <span class="lf-footer-logo-name">Learning Facility</span>
+                            <span class="lf-footer-logo-tagline">Your key to lifelong learning</span>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="col-md-6 col-lg-4 col-xl-3" aria-labelledby="lfFooterTermsTitle">
+                    <h2 class="lf-footer-title" id="lfFooterTermsTitle">Our Terms</h2>
+                    <!-- DYNAMIC: wp_nav_menu( footer-terms ) -->
+                    <ul class="lf-footer-links">
+                        <li><a class="lf-footer-link" href="#">Terms and Conditions</a></li>
+                        <li><a class="lf-footer-link" href="#">Privacy Policy</a></li>
+                        <li><a class="lf-footer-link" href="#">Disclaimer</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="col-md-6 col-lg-4 col-xl-3" aria-labelledby="lfFooterLinksTitle">
+                    <h2 class="lf-footer-title" id="lfFooterLinksTitle">Important Links</h2>
+                    <!-- DYNAMIC: wp_nav_menu( footer-links ) -->
+                    <ul class="lf-footer-links">
+                        <li><a class="lf-footer-link" href="#">Contact</a></li>
+                        <li><a class="lf-footer-link" href="blog.html">Blogs</a></li>
+                        <li><a class="lf-footer-link" href="#">Certificate Order</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/js/reviews.js"></script>
+    <script src="assets/js/expand.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

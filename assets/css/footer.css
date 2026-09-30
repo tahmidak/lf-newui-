@@ -1,0 +1,77 @@
+/* ============================================
+    FOOTER
+    abbr: lf-footer
+
+    Logo + two link columns. Stacks to one column below md; at md the
+    logo takes its own row and the two link columns sit side by side.
+============================================ */
+
+.lf-footer {
+    color: var(--lf-white);
+}
+
+/* ---- Logo ---------------------------------------------------------- */
+/* Every size is in em, so the whole lock-up scales from one font-size.
+   Mobile draws it half as big again as desktop (mark 100px tall). */
+.lf-footer-logo {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 0.3em;
+    font-size: 1.5rem;
+    color: var(--lf-white);
+}
+
+.lf-footer-logo:hover {
+    color: var(--lf-white);
+}
+
+.lf-footer-logo-mark {
+    flex-shrink: 0;
+    width: auto;
+    height: 4.1875em;
+}
+
+.lf-footer-logo-text {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.1em;
+    font-family: var(--lf-font-logo);
+    line-height: 1.25;
+    white-space: nowrap;
+}
+
+.lf-footer-logo-name {
+    font-size: 1.0625em;
+    font-weight: 700;
+}
+
+.lf-footer-logo-tagline {
+    font-size: 0.75em;
+}
+
+/* ---- Link columns -------------------------------------------------- */
+.lf-footer-title {
+    margin-bottom: 0.25rem;
+    font-size: var(--lf-fs-footer-header);
+}
+
+.lf-footer-links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--lf-fs-sm);
+    line-height: var(--lf-lh-links);
+}
+
+.lf-footer-link:hover {
+    color: var(--lf-white);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+/* ---- lg and up ----------------------------------------------------- */
+@media (min-width: 992px) {
+    .lf-footer-logo {
+        font-size: 1rem;
+    }
+}

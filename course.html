@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course - Learning Facility</title>
+
+    <!-- Fonts: Lato (UI/body), Open Sans (logo wordmark) — see tokens.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ============================================
+        HEADER
+        abbr: lf-header
+        Bootstrap JS doing real work here:
+        - offcanvas: the mobile menu (#lfHeaderMenu)
+        - collapse:  the mobile search row (#lfHeaderSearch)
+    ============================================ -->
+    <header class="lf-header" data-lf-header>
+        <nav class="navbar navbar-expand-lg lf-header-bar" aria-label="Main">
+            <div class="lf-container d-flex flex-wrap flex-lg-nowrap align-items-center">
+
+                <!-- DYNAMIC: home_url() -->
+                <!-- The mark is a traced placeholder — swap for the real logo file. -->
+                <a class="lf-header-logo" href="home.html">
+                    <svg class="lf-header-logo-mark" viewBox="0 0 213 238" aria-hidden="true" focusable="false">
+                        <path fill="currentColor" d="M0 65 28 29v139l37 33V108h25v129A119 119 0 0 1 0 173Z"/>
+                        <path fill="currentColor" d="M110 0a119 119 0 0 1 95 52l-24 16a91 91 0 0 0-43-34v69h67v30h-67v101l-28 4Z"/>
+                    </svg>
+                    <span class="lf-header-logo-text">
+                        <span class="lf-header-logo-name">Learning Facility</span>
+                        <span class="lf-header-logo-tagline">Your key to lifelong learning</span>
+                    </span>
+                </a>
+
+                <!-- Search: always visible from lg; a collapse row below lg -->
+                <div class="collapse d-lg-block order-last order-lg-0 lf-header-search" id="lfHeaderSearch">
+                    <!-- DYNAMIC: action = home_url('/'), post_type = Tutor LMS courses -->
+                    <form class="lf-search" role="search" action="#" method="get">
+                        <label class="visually-hidden" for="lfHeaderSearchInput">Search courses</label>
+                        <input class="lf-search-input" id="lfHeaderSearchInput" type="search" name="s" placeholder="Search Courses ...">
+                        <input type="hidden" name="post_type" value="courses">
+                        <button class="lf-search-btn" type="submit" aria-label="Search"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Nav: inline from lg; an offcanvas panel below lg -->
+                <div class="offcanvas offcanvas-top lf-header-menu" id="lfHeaderMenu" tabindex="-1" aria-label="Main menu" data-lf-header-menu>
+                    <div class="offcanvas-body">
+                        <!-- DYNAMIC: wp_nav_menu( primary ) — one <li> per menu item -->
+                        <ul class="navbar-nav ms-lg-auto lf-header-nav">
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link" href="home.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link lf-header-link-hot" href="hot-deals.html">Hot Deals<span aria-hidden="true">🔥</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link" href="courses.html">All Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <!-- DYNAMIC: login / dashboard link depending on is_user_logged_in() -->
+                                <a class="nav-link lf-header-link" href="#">Log In/Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center ms-auto lf-header-actions">
+                    <button class="lf-header-icon-btn d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#lfHeaderSearch" aria-controls="lfHeaderSearch" aria-expanded="false" aria-label="Search courses">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <circle cx="10.5" cy="10.5" r="7"/>
+                            <path d="m15.75 15.75 5.25 5.25"/>
+                        </svg>
+                    </button>
+
+                    <!-- DYNAMIC: wc_get_cart_url() -->
+                    <a class="lf-header-icon-btn" href="cart.html" aria-label="Cart">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                            <path d="M1.5 2.5h2.75l2.5 12.5h12.5l2.5-9H5.5"/>
+                            <circle cx="9" cy="19.75" r="1.75"/>
+                            <circle cx="17" cy="19.75" r="1.75"/>
+                        </svg>
+                    </a>
+
+                    <button class="lf-header-icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#lfHeaderMenu" aria-controls="lfHeaderMenu" aria-expanded="false" aria-label="Menu">
+                        <svg class="lf-header-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <path d="M3 5h18M3 12h18M3 19h18"/>
+                        </svg>
+                        <svg class="lf-header-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <path d="M5 5l14 14M19 5 5 19"/>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ============================================
+            COURSE — lf-sc-main
+            One row, two columns: title + overview + modules on the left,
+            a full-height sidebar with a sticky purchase card on the right.
+        ============================================ -->
+        <section class="lf-section lf-sc-main">
+            <div class="lf-container">
+                <div class="row g-4 g-lg-5">
+
+                    <div class="col-12 col-lg-8">
+                        <!-- DYNAMIC: course_title -->
+                        <h1 class="lf-sc-hi-title">Parenting and Awareness Online Course</h1>
+
+                        <p class="lf-eyebrow">A Closer Look at the Course</p>
+                        <h2 class="lf-sec-header">Course Overview</h2>
+
+                        <!-- Clamped to a fixed height, opens on See More (expand.js) -->
+                        <div class="lf-expand lf-sc-overview" data-lf-expand>
+                            <!-- DYNAMIC: course overview (editor content) -->
+                            <div class="lf-rich lf-expand-body" data-lf-expand-body>
+                                    <p>
+                                        The Autism and Emotional Regulation course is a holistic 10-module learning
+                                        experience created for educators, caregivers, mental health workers, workplace
+                                        leaders, support professionals, and anyone seeking deeper knowledge about autism.
+                                        Emotional regulation is one of the core areas of support required by autistic
+                                        individuals. Without a strong understanding of sensory needs, communication
+                                        differences, and mental health factors, it becomes challenging to support
+                                        emotional balance and resilience.
+                                    </p>
+                                    <p>
+                                        This course aims to bridge that gap by teaching you not only how autism affects
+                                        emotional development, but how supportive strategies can be implemented across all
+                                        environments &mdash; schools, homes, workplaces, and community settings. Through
+                                        the 10 modules listed below, you will acquire the confidence, language, and
+                                        structured tools to better understand emotional needs and respond with
+                                        evidence-based interventions.
+                                    </p>
+                                    <p>
+                                        Every module closes with practical prompts you can take straight into a classroom,
+                                        a care setting or a team meeting, so the learning does not stop at the screen.
+                                        You will finish with a shared language for emotional regulation and a set of
+                                        responses that hold up under pressure.
+                                    </p>
+                            </div>
+
+                            <button class="btn lf-btn lf-btn-outline lf-btn-sm lf-expand-toggle lf-sc-overview-btn" type="button" data-lf-expand-toggle aria-expanded="false">
+                                <span class="lf-expand-more-label">See More</span>
+                                <span class="lf-expand-less">See Less</span>
+                            </button>
+                        </div>
+
+                        <!-- ---- Course modules — Tutor LMS markup ---- -->
+                        <div class="lf-sc-mod" data-lf-topics>
+                            <div class="lf-sc-mod-head">
+                                <p class="lf-eyebrow">What you will learn</p>
+                                <h2 class="lf-sec-header">Course Modules</h2>
+                            </div>
+
+                            <!-- DYNAMIC: tutor_course_topics() prints this block -->
+                            <!-- LOOP START: course topic -->
+                            <div class="tutor-accordion tutor-mt-24">
+                                <div class="tutor-accordion-item">
+                                    <h4 class="tutor-accordion-item-header is-active" role="button" tabindex="0" aria-expanded="true">
+                                        <span class="lf-sc-mod-num">1</span>
+                                        <!-- DYNAMIC: topic title -->
+                                        <span class="lf-sc-mod-name">Module 1 Understanding Autism</span>
+                                        <!-- DYNAMIC: topic duration -->
+                                        <span class="lf-sc-mod-time">00:00</span>
+                                        <i class="bi bi-chevron-down lf-sc-mod-caret" aria-hidden="true"></i>
+                                    </h4>
+                                    <div class="tutor-accordion-item-body">
+                                        <!-- LOOP START: lesson -->
+                                        <ul class="tutor-course-content-list">
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Introduction to the module</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">04:20</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Key concepts and terminology</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">06:45</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Applying this in practice</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">08:10</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        </ul>
+                                        <!-- LOOP END -->
+                                    </div>
+                                </div>
+                                <div class="tutor-accordion-item">
+                                    <h4 class="tutor-accordion-item-header" role="button" tabindex="0" aria-expanded="false">
+                                        <span class="lf-sc-mod-num">2</span>
+                                        <!-- DYNAMIC: topic title -->
+                                        <span class="lf-sc-mod-name">Module 2 Emotional Wellbeing and Mental Health</span>
+                                        <!-- DYNAMIC: topic duration -->
+                                        <span class="lf-sc-mod-time">00:00</span>
+                                        <i class="bi bi-chevron-down lf-sc-mod-caret" aria-hidden="true"></i>
+                                    </h4>
+                                    <div class="tutor-accordion-item-body" style="display: none;">
+                                        <!-- LOOP START: lesson -->
+                                        <ul class="tutor-course-content-list">
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Introduction to the module</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">04:20</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Key concepts and terminology</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">06:45</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Applying this in practice</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">08:10</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        </ul>
+                                        <!-- LOOP END -->
+                                    </div>
+                                </div>
+                                <div class="tutor-accordion-item">
+                                    <h4 class="tutor-accordion-item-header" role="button" tabindex="0" aria-expanded="false">
+                                        <span class="lf-sc-mod-num">3</span>
+                                        <!-- DYNAMIC: topic title -->
+                                        <span class="lf-sc-mod-name">Module 3_ Social Communication and Relationships</span>
+                                        <!-- DYNAMIC: topic duration -->
+                                        <span class="lf-sc-mod-time">00:00</span>
+                                        <i class="bi bi-chevron-down lf-sc-mod-caret" aria-hidden="true"></i>
+                                    </h4>
+                                    <div class="tutor-accordion-item-body" style="display: none;">
+                                        <!-- LOOP START: lesson -->
+                                        <ul class="tutor-course-content-list">
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Introduction to the module</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">04:20</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Key concepts and terminology</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">06:45</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Applying this in practice</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">08:10</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        </ul>
+                                        <!-- LOOP END -->
+                                    </div>
+                                </div>
+                                <div class="tutor-accordion-item">
+                                    <h4 class="tutor-accordion-item-header" role="button" tabindex="0" aria-expanded="false">
+                                        <span class="lf-sc-mod-num">4</span>
+                                        <!-- DYNAMIC: topic title -->
+                                        <span class="lf-sc-mod-name">Module 4_Sensory Processing and Emotional Responses</span>
+                                        <!-- DYNAMIC: topic duration -->
+                                        <span class="lf-sc-mod-time">00:00</span>
+                                        <i class="bi bi-chevron-down lf-sc-mod-caret" aria-hidden="true"></i>
+                                    </h4>
+                                    <div class="tutor-accordion-item-body" style="display: none;">
+                                        <!-- LOOP START: lesson -->
+                                        <ul class="tutor-course-content-list">
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Introduction to the module</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">04:20</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Key concepts and terminology</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">06:45</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Applying this in practice</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">08:10</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        </ul>
+                                        <!-- LOOP END -->
+                                    </div>
+                                </div>
+                                <div class="tutor-accordion-item">
+                                    <h4 class="tutor-accordion-item-header" role="button" tabindex="0" aria-expanded="false">
+                                        <span class="lf-sc-mod-num">5</span>
+                                        <!-- DYNAMIC: topic title -->
+                                        <span class="lf-sc-mod-name">Module 5 Coping Strategies and Resilience</span>
+                                        <!-- DYNAMIC: topic duration -->
+                                        <span class="lf-sc-mod-time">00:00</span>
+                                        <i class="bi bi-chevron-down lf-sc-mod-caret" aria-hidden="true"></i>
+                                    </h4>
+                                    <div class="tutor-accordion-item-body" style="display: none;">
+                                        <!-- LOOP START: lesson -->
+                                        <ul class="tutor-course-content-list">
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Introduction to the module</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">04:20</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Key concepts and terminology</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">06:45</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Applying this in practice</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">08:10</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        </ul>
+                                        <!-- LOOP END -->
+                                    </div>
+                                </div>
+                                <div class="tutor-accordion-item">
+                                    <h4 class="tutor-accordion-item-header" role="button" tabindex="0" aria-expanded="false">
+                                        <span class="lf-sc-mod-num">6</span>
+                                        <!-- DYNAMIC: topic title -->
+                                        <span class="lf-sc-mod-name">Module 6_Education and Learning Support</span>
+                                        <!-- DYNAMIC: topic duration -->
+                                        <span class="lf-sc-mod-time">00:00</span>
+                                        <i class="bi bi-chevron-down lf-sc-mod-caret" aria-hidden="true"></i>
+                                    </h4>
+                                    <div class="tutor-accordion-item-body" style="display: none;">
+                                        <!-- LOOP START: lesson -->
+                                        <ul class="tutor-course-content-list">
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Introduction to the module</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">04:20</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Key concepts and terminology</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">06:45</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Applying this in practice</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">08:10</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        </ul>
+                                        <!-- LOOP END -->
+                                    </div>
+                                </div>
+                                <div class="tutor-accordion-item">
+                                    <h4 class="tutor-accordion-item-header" role="button" tabindex="0" aria-expanded="false">
+                                        <span class="lf-sc-mod-num">7</span>
+                                        <!-- DYNAMIC: topic title -->
+                                        <span class="lf-sc-mod-name">Module 7_Workplace Wellbeing and Career Development</span>
+                                        <!-- DYNAMIC: topic duration -->
+                                        <span class="lf-sc-mod-time">00:00</span>
+                                        <i class="bi bi-chevron-down lf-sc-mod-caret" aria-hidden="true"></i>
+                                    </h4>
+                                    <div class="tutor-accordion-item-body" style="display: none;">
+                                        <!-- LOOP START: lesson -->
+                                        <ul class="tutor-course-content-list">
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Introduction to the module</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">04:20</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Key concepts and terminology</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">06:45</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Applying this in practice</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">08:10</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        </ul>
+                                        <!-- LOOP END -->
+                                    </div>
+                                </div>
+                                <div class="tutor-accordion-item">
+                                    <h4 class="tutor-accordion-item-header" role="button" tabindex="0" aria-expanded="false">
+                                        <span class="lf-sc-mod-num">8</span>
+                                        <!-- DYNAMIC: topic title -->
+                                        <span class="lf-sc-mod-name">Module 8_Mental Health Support Services</span>
+                                        <!-- DYNAMIC: topic duration -->
+                                        <span class="lf-sc-mod-time">00:00</span>
+                                        <i class="bi bi-chevron-down lf-sc-mod-caret" aria-hidden="true"></i>
+                                    </h4>
+                                    <div class="tutor-accordion-item-body" style="display: none;">
+                                        <!-- LOOP START: lesson -->
+                                        <ul class="tutor-course-content-list">
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Introduction to the module</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">04:20</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Key concepts and terminology</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">06:45</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Applying this in practice</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">08:10</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        </ul>
+                                        <!-- LOOP END -->
+                                    </div>
+                                </div>
+                                <div class="tutor-accordion-item">
+                                    <h4 class="tutor-accordion-item-header" role="button" tabindex="0" aria-expanded="false">
+                                        <span class="lf-sc-mod-num">9</span>
+                                        <!-- DYNAMIC: topic title -->
+                                        <span class="lf-sc-mod-name">Module 9_Family and Caregiver Support</span>
+                                        <!-- DYNAMIC: topic duration -->
+                                        <span class="lf-sc-mod-time">00:00</span>
+                                        <i class="bi bi-chevron-down lf-sc-mod-caret" aria-hidden="true"></i>
+                                    </h4>
+                                    <div class="tutor-accordion-item-body" style="display: none;">
+                                        <!-- LOOP START: lesson -->
+                                        <ul class="tutor-course-content-list">
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Introduction to the module</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">04:20</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Key concepts and terminology</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">06:45</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Applying this in practice</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">08:10</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        </ul>
+                                        <!-- LOOP END -->
+                                    </div>
+                                </div>
+                                <div class="tutor-accordion-item">
+                                    <h4 class="tutor-accordion-item-header" role="button" tabindex="0" aria-expanded="false">
+                                        <span class="lf-sc-mod-num">10</span>
+                                        <!-- DYNAMIC: topic title -->
+                                        <span class="lf-sc-mod-name">Module 10_Promoting Self-Advocacy and Independence</span>
+                                        <!-- DYNAMIC: topic duration -->
+                                        <span class="lf-sc-mod-time">00:00</span>
+                                        <i class="bi bi-chevron-down lf-sc-mod-caret" aria-hidden="true"></i>
+                                    </h4>
+                                    <div class="tutor-accordion-item-body" style="display: none;">
+                                        <!-- LOOP START: lesson -->
+                                        <ul class="tutor-course-content-list">
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Introduction to the module</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">04:20</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Key concepts and terminology</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">06:45</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        <li class="tutor-course-content-list-item">
+                                            <span class="tutor-course-content-list-item-icon tutor-mr-12"><i class="bi bi-play-circle"></i></span>
+                                            <h5 class="tutor-course-content-list-item-title">Applying this in practice</h5>
+                                            <span class="tutor-course-content-list-item-duration tutor-fs-7">08:10</span>
+                                            <span class="tutor-course-content-list-item-status"><i class="bi bi-lock-fill"></i></span>
+                                        </li>
+                                        </ul>
+                                        <!-- LOOP END -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- LOOP END -->
+                        </div>
+                    </div>
+
+                    <aside class="col-12 col-lg-4 lf-sc-sidebar">
+                        <div class="lf-sc-card">
+                            <!-- LOOP START: course card -->
+                            <article class="lf-ccard">
+                                <a class="lf-ccard-media" href="course.html">
+                                    <!-- DYNAMIC: course thumbnail -->
+                                    <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                    <!-- DYNAMIC: course category -->
+                                    <span class="lf-ccard-chip">Personal Development</span>
+                                    <!-- DYNAMIC: discount percentage -->
+                                    <span class="lf-ccard-badge">80%<br>Off</span>
+                                </a>
+                                <div class="lf-ccard-body">
+                                    <h3 class="lf-ccard-title">
+                                        <!-- DYNAMIC: course_title -->
+                                        <a href="course.html">Parenting and Awareness Online Course</a>
+                                    </h3>
+                                    <div class="lf-ccard-meta">
+                                        <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                        <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                    </div>
+                                    <hr class="lf-ccard-hr">
+                                    <p class="lf-ccard-guarantee"><i class="bi bi-arrow-counterclockwise"></i> 14-Day Money-Back Guarantee</p>
+                                    <hr class="lf-ccard-hr">
+                                    <div class="lf-ccard-foot">
+                                        <p class="lf-ccard-price">
+                                            <!-- DYNAMIC: regular price / sale price -->
+                                            <span class="lf-ccard-price-old">&pound;89.00</span>
+                                            <span class="lf-ccard-price-now">&pound;14.00</span>
+                                        </p>
+                                        <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- LOOP END -->
+                        </div>
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            CERTIFICATE CTA — universal (lf-cert)
+        ============================================ -->
+        <section class="lf-section lf-cert">
+            <div class="lf-container">
+                <div class="row align-items-center g-4 g-lg-5">
+                    <div class="col-12 col-lg-6 order-lg-1 lf-cert-media">
+                        <img class="lf-cert-img" src="assets/imgs/certificate.png" alt="Learning Facility certificate of completion">
+                    </div>
+
+                    <div class="col-12 col-lg-6 order-lg-0 lf-cert-body">
+                        <p class="lf-eyebrow lf-eyebrow-purple">A certificate for your progress</p>
+                        <h2 class="lf-cert-header">Learn with confidence.<br>Show what you can do.</h2>
+                        <p class="lf-cert-text">
+                            Every course is built to give you more than information. Learn
+                            practical skills, complete your training online and receive a
+                            certificate you can be proud to share.
+                        </p>
+                        <a class="btn lf-btn lf-btn-accent lf-btn-arrow" href="#">
+                            Get Your Certificate <svg class="lf-btn-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            ACCREDITATION — universal (lf-accri)
+            One flat badge list: a CSS grid from lg, an auto-scrolling
+            swipeable strip below it (assets/js/accri.js builds and tears
+            down the Swiper at the breakpoint). Closed top and bottom by
+            a rule, as drawn.
+        ============================================ -->
+        <section class="lf-accri">
+            <div class="lf-container">
+                <hr class="lf-hr">
+
+                <div class="lf-section">
+                    <p class="lf-eyebrow">Quality you can trust</p>
+                    <h2 class="lf-sec-header">Our courses are Trusted by</h2>
+
+                    <div class="lf-accri-slider">
+                        <div class="swiper lf-accri-swiper" data-lf-accri>
+                            <!-- DYNAMIC: accreditation badges -->
+                            <!-- LOOP START: accreditation badge -->
+                            <div class="swiper-wrapper lf-accri-row">
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-ioas.png" alt="IOAS High Quality Assurance"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-aoht.png" alt="AoHT Member"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-disability-confident.png" alt="Disability Confident Committed"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-cpd-provider.png" alt="CPD Accredited Provider"></div>
+                            <div class="swiper-slide lf-accri-card lf-accri-card-featured"><img src="assets/imgs/badge-cpd-international.png" alt="CPD International Quality"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-14-days.png" alt="14 Days Money Back Guarantee"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-lifetime-access.png" alt="Lifetime Access"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-incensu.png" alt="Incensu Registered"></div>
+                            <div class="swiper-slide lf-accri-card"><img src="assets/imgs/badge-ssl.png" alt="SSL Secure"></div>
+                            </div>
+                            <!-- LOOP END -->
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="lf-hr">
+            </div>
+        </section>
+
+        <!-- ============================================
+            SIMILAR COURSES — lf-sc-sim
+            Same course card as every other grid.
+        ============================================ -->
+        <section class="lf-section lf-sc-sim">
+            <div class="lf-container">
+                <p class="lf-eyebrow">You may find interest</p>
+                <h2 class="lf-sec-header">Similar Courses</h2>
+
+                <div class="row g-4 lf-crow">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            FAQ — universal (lf-faq)
+            Bootstrap accordion; one row open at a time via data-bs-parent.
+        ============================================ -->
+        <section class="lf-section lf-faq">
+            <div class="lf-container text-center">
+                <p class="lf-eyebrow">Need to know</p>
+                <h2 class="lf-sec-header">Frequently Asked Questions</h2>
+
+                <!-- LOOP START: faq row -->
+                <div class="accordion lf-faq-accordion text-start" id="lfFaqAccordion">
+                    <div class="accordion-item lf-faq-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button lf-faq-btn" type="button" data-bs-toggle="collapse" data-bs-target="#lfFaq1" aria-expanded="true" aria-controls="lfFaq1">
+                                Become a lifetime prime member?
+                            </button>
+                        </h3>
+                        <div class="accordion-collapse collapse show" id="lfFaq1" data-bs-parent="#lfFaqAccordion">
+                            <div class="accordion-body lf-faq-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item lf-faq-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button lf-faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lfFaq2" aria-expanded="false" aria-controls="lfFaq2">
+                                Become a lifetime prime member?
+                            </button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="lfFaq2" data-bs-parent="#lfFaqAccordion">
+                            <div class="accordion-body lf-faq-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item lf-faq-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button lf-faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lfFaq3" aria-expanded="false" aria-controls="lfFaq3">
+                                Become a lifetime prime member?
+                            </button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="lfFaq3" data-bs-parent="#lfFaqAccordion">
+                            <div class="accordion-body lf-faq-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item lf-faq-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button lf-faq-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lfFaq4" aria-expanded="false" aria-controls="lfFaq4">
+                                Become a lifetime prime member?
+                            </button>
+                        </h3>
+                        <div class="accordion-collapse collapse" id="lfFaq4" data-bs-parent="#lfFaqAccordion">
+                            <div class="accordion-body lf-faq-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- LOOP END -->
+            </div>
+        </section>
+
+        <div class="lf-container">
+            <hr class="lf-hr">
+        </div>
+
+        <!-- ============================================
+            REVIEWS — universal (lf-rev)
+            Swiper 11 runs the slider (assets/js/reviews.js): 3 cards at lg,
+            1 on mobile — the counts the design draws. Hook: data-lf-rev.
+        ============================================ -->
+        <section class="lf-section lf-rev lf-bg-band">
+            <div class="lf-container">
+                <h2 class="lf-sec-header">What our students say</h2>
+
+                <div class="lf-rev-row">
+                    <!-- DYNAMIC: aggregate rating -->
+                    <div class="lf-rev-score">
+                        <p class="lf-rev-score-title">Excellent</p>
+                        <!-- 4.9 of 5 = 98%: four full stars and a fifth filled 90% -->
+                        <p class="lf-rev-score-stars"><span class="lf-stars lf-stars-lg" style="--lf-stars-fill: 98%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span></p>
+                        <p class="lf-rev-score-avg">4.9 average</p>
+                        <p class="lf-rev-score-count">158 Reviews</p>
+                        <img class="lf-rev-score-logo" src="assets/imgs/reviews-io-logo.png" alt="Reviews.io">
+                    </div>
+
+                    <div class="lf-rev-slider" data-lf-rev>
+                        <button class="lf-rev-nav" type="button" data-lf-rev-prev aria-label="Previous reviews">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+
+                        <div class="swiper lf-rev-swiper">
+                            <div class="swiper-wrapper">
+                                <!-- LOOP START: review card -->
+                                <div class="swiper-slide">
+                                    <article class="lf-rev-card">
+                                        <div class="lf-rev-card-head">
+                                            <!-- DYNAMIC: reviewer name -->
+                                            <span class="lf-rev-name">Taufiq Israil</span>
+                                            <!-- DYNAMIC: rating -> --lf-stars-fill (4.5/5 = 90%) -->
+                                            <span class="lf-stars" style="--lf-stars-fill: 90%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span>
+                                        </div>
+                                        <p class="lf-rev-verified"><i class="bi bi-patch-check-fill"></i> Verified Customer</p>
+                                        <!-- DYNAMIC: review body -->
+                                        <p class="lf-rev-quote">
+                                            "This course completely transformed how I approach design.
+                                            The section on design systems was worth the price alone. I
+                                            landed a Junior Designer role three weeks after finishing!"
+                                        </p>
+                                    </article>
+                                </div>
+                                <div class="swiper-slide">
+                                    <article class="lf-rev-card">
+                                        <div class="lf-rev-card-head">
+                                            <!-- DYNAMIC: reviewer name -->
+                                            <span class="lf-rev-name">Taufiq Israil</span>
+                                            <!-- DYNAMIC: rating -> --lf-stars-fill (4.5/5 = 90%) -->
+                                            <span class="lf-stars" style="--lf-stars-fill: 90%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span>
+                                        </div>
+                                        <p class="lf-rev-verified"><i class="bi bi-patch-check-fill"></i> Verified Customer</p>
+                                        <!-- DYNAMIC: review body -->
+                                        <p class="lf-rev-quote">
+                                            "This course completely transformed how I approach design.
+                                            The section on design systems was worth the price alone. I
+                                            landed a Junior Designer role three weeks after finishing!"
+                                        </p>
+                                    </article>
+                                </div>
+                                <div class="swiper-slide">
+                                    <article class="lf-rev-card">
+                                        <div class="lf-rev-card-head">
+                                            <!-- DYNAMIC: reviewer name -->
+                                            <span class="lf-rev-name">Taufiq Israil</span>
+                                            <!-- DYNAMIC: rating -> --lf-stars-fill (4.5/5 = 90%) -->
+                                            <span class="lf-stars" style="--lf-stars-fill: 90%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span>
+                                        </div>
+                                        <p class="lf-rev-verified"><i class="bi bi-patch-check-fill"></i> Verified Customer</p>
+                                        <!-- DYNAMIC: review body -->
+                                        <p class="lf-rev-quote">
+                                            "This course completely transformed how I approach design.
+                                            The section on design systems was worth the price alone. I
+                                            landed a Junior Designer role three weeks after finishing!"
+                                        </p>
+                                    </article>
+                                </div>
+                                <div class="swiper-slide">
+                                    <article class="lf-rev-card">
+                                        <div class="lf-rev-card-head">
+                                            <!-- DYNAMIC: reviewer name -->
+                                            <span class="lf-rev-name">Taufiq Israil</span>
+                                            <!-- DYNAMIC: rating -> --lf-stars-fill (4.5/5 = 90%) -->
+                                            <span class="lf-stars" style="--lf-stars-fill: 90%"><span class="lf-stars-track"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span><span class="lf-stars-on"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></span></span>
+                                        </div>
+                                        <p class="lf-rev-verified"><i class="bi bi-patch-check-fill"></i> Verified Customer</p>
+                                        <!-- DYNAMIC: review body -->
+                                        <p class="lf-rev-quote">
+                                            "This course completely transformed how I approach design.
+                                            The section on design systems was worth the price alone. I
+                                            landed a Junior Designer role three weeks after finishing!"
+                                        </p>
+                                    </article>
+                                </div>
+                                <!-- LOOP END -->
+                            </div>
+                        </div>
+
+                        <button class="lf-rev-nav" type="button" data-lf-rev-next aria-label="Next reviews">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================
+        FOOTER
+        abbr: lf-footer
+    ============================================ -->
+    <footer class="lf-section lf-footer lf-bg-purple">
+        <div class="lf-container">
+            <div class="row gy-5">
+
+                <div class="col-12 col-lg-4 col-xl-3">
+                    <!-- DYNAMIC: home_url() -->
+                    <!-- The mark is a traced placeholder — swap for the real logo file. -->
+                    <a class="lf-footer-logo" href="home.html">
+                        <svg class="lf-footer-logo-mark" viewBox="0 0 213 238" aria-hidden="true" focusable="false">
+                            <path fill="currentColor" d="M0 65 28 29v139l37 33V108h25v129A119 119 0 0 1 0 173Z"/>
+                            <path fill="currentColor" d="M110 0a119 119 0 0 1 95 52l-24 16a91 91 0 0 0-43-34v69h67v30h-67v101l-28 4Z"/>
+                        </svg>
+                        <span class="lf-footer-logo-text">
+                            <span class="lf-footer-logo-name">Learning Facility</span>
+                            <span class="lf-footer-logo-tagline">Your key to lifelong learning</span>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="col-md-6 col-lg-4 col-xl-3" aria-labelledby="lfFooterTermsTitle">
+                    <h2 class="lf-footer-title" id="lfFooterTermsTitle">Our Terms</h2>
+                    <!-- DYNAMIC: wp_nav_menu( footer-terms ) -->
+                    <ul class="lf-footer-links">
+                        <li><a class="lf-footer-link" href="#">Terms and Conditions</a></li>
+                        <li><a class="lf-footer-link" href="#">Privacy Policy</a></li>
+                        <li><a class="lf-footer-link" href="#">Disclaimer</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="col-md-6 col-lg-4 col-xl-3" aria-labelledby="lfFooterLinksTitle">
+                    <h2 class="lf-footer-title" id="lfFooterLinksTitle">Important Links</h2>
+                    <!-- DYNAMIC: wp_nav_menu( footer-links ) -->
+                    <ul class="lf-footer-links">
+                        <li><a class="lf-footer-link" href="#">Contact</a></li>
+                        <li><a class="lf-footer-link" href="blog.html">Blogs</a></li>
+                        <li><a class="lf-footer-link" href="#">Certificate Order</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/js/reviews.js"></script>
+    <script src="assets/js/expand.js"></script>
+    <script src="assets/js/topics.js"></script>
+    <script src="assets/js/accri.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

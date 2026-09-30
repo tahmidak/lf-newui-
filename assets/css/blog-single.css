@@ -1,0 +1,103 @@
+/* ============================================
+    SINGLE BLOG
+    Page sections: lf-sblg-h (article header), lf-sblg-body (article),
+    lf-sblg-toc (table of contents).
+
+    Laid out as a two-row table, not one tall sidebar:
+      row 1 · col 1  title + excerpt + featured image
+      row 1 · col 2  membership promo artwork
+      row 2 · col 1  the article (long)
+      row 2 · col 2  the table of contents — this alone is sticky
+
+    The article body is .lf-rich (rich.css), so everything the editor
+    prints is styled. No comment form: removed on request.
+============================================ */
+
+/* ---- Article header: lf-sblg-h ------------------------------------- */
+.lf-sblg-h-title {
+    margin-bottom: 0.75rem;
+    color: var(--lf-ink);
+    font-size: 1.75rem;
+    line-height: 1.3;
+}
+
+.lf-sblg-h-standfirst {
+    margin-bottom: 1.5rem;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-sblg-featured {
+    width: 100%;
+    height: auto;
+    border-radius: var(--lf-radius-lg);
+}
+
+/* ---- Promo (row 1, col 2) ------------------------------------------ */
+.lf-sblg-promo {
+    display: block;
+}
+
+.lf-sblg-promo img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--lf-radius-lg);
+}
+
+/* ---- Article body (row 2, col 1) ----------------------------------- */
+.lf-sblg-more {
+    margin-block: 2.5rem 0;
+    color: var(--lf-ink);
+    font-size: 1.75rem;
+}
+
+/* ---- Table of contents: lf-sblg-toc (row 2, col 2) ----------------- */
+.lf-sblg-toc {
+    overflow: hidden;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+}
+
+.lf-sblg-toc-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0;
+    padding: 0.875rem 1.25rem;
+    background-color: var(--lf-purple);
+    color: var(--lf-white);
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-sblg-toc-list {
+    margin: 0;
+    padding: 0.75rem;
+    list-style: none;
+    background-color: var(--lf-surface);
+}
+
+.lf-sblg-toc-link {
+    display: block;
+    padding: 0.5rem 0.875rem;
+    border-left: 3px solid var(--lf-purple-light);
+    color: var(--lf-purple);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-sblg-toc-link:hover,
+.lf-sblg-toc-link.active {
+    background-color: var(--lf-white);
+    color: var(--lf-purple);
+}
+
+@media (min-width: 992px) {
+    .lf-sblg-h-title {
+        font-size: 2.25rem;
+    }
+
+    /* Only the contents list sticks — not the whole column */
+    .lf-sblg-toc {
+        position: sticky;
+        top: 1.5rem;
+    }
+}

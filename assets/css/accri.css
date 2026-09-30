@@ -1,0 +1,104 @@
+/* ============================================
+    ACCREDITATION / "Our courses are Trusted by"
+    abbr: lf-accri
+    Universal. Home, Hot Deals, Single Course, All Bundles, Single Bundle,
+    Checkout, Certificate Order.
+
+    ONE flat list of badges in the markup — the theme dev writes a single
+    loop. The layout is CSS:
+      lg and up — 2x2 · one tall featured tile · 2x2, placed explicitly
+                  so the fifth badge is the centre one
+      below lg  — an auto-scrolling, swipeable strip (Swiper, marquee
+                  style; assets/js/accri.js builds and tears it down at
+                  the breakpoint)
+
+    Tiles are RECTANGLES with the dark-to-light gradient from tokens.css,
+    and the section is closed top and bottom by a thin rule.
+============================================ */
+
+.lf-accri {
+    text-align: center;
+}
+
+.lf-accri-slider {
+    margin-top: 2rem;
+}
+
+.lf-accri-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6.25rem;
+    padding: 0.875rem 1.25rem;
+    border-radius: var(--lf-radius);
+    background: var(--lf-grad-card);
+    transition: transform 0.25s ease;
+}
+
+.lf-accri-card:hover {
+    transform: translateY(-4px);
+}
+
+.lf-accri-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* ---- Below lg: marquee strip --------------------------------------- */
+.lf-accri-swiper {
+    overflow: hidden;
+}
+
+/* Constant speed — a marquee, not an eased slide */
+.lf-accri-swiper .swiper-wrapper {
+    transition-timing-function: linear;
+}
+
+.lf-accri-swiper .swiper-slide {
+    width: 9.5rem;
+    height: auto;
+}
+
+/* ---- lg and up: the drawn grid -------------------------------------
+   Swiper is torn down here, so this is a plain grid again. */
+@media (min-width: 992px) {
+    .lf-accri-swiper {
+        overflow: visible;
+    }
+
+    .lf-accri-row {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-auto-rows: 6.25rem;
+        gap: 0.875rem;
+    }
+
+    /* Same specificity as the marquee's slide width above, so the tiles
+       fill their grid cells again */
+    .lf-accri-swiper .swiper-slide {
+        width: auto;
+    }
+
+    /* Four badges left, the featured one in the middle spanning both
+       rows, four badges right — in one DOM order. */
+    .lf-accri-card:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .lf-accri-card:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .lf-accri-card:nth-child(3) { grid-column: 1; grid-row: 2; }
+    .lf-accri-card:nth-child(4) { grid-column: 2; grid-row: 2; }
+    .lf-accri-card:nth-child(5) { grid-column: 3; grid-row: 1 / span 2; }
+    .lf-accri-card:nth-child(6) { grid-column: 4; grid-row: 1; }
+    .lf-accri-card:nth-child(7) { grid-column: 5; grid-row: 1; }
+    .lf-accri-card:nth-child(8) { grid-column: 4; grid-row: 2; }
+    .lf-accri-card:nth-child(9) { grid-column: 5; grid-row: 2; }
+
+    .lf-accri-card-featured {
+        height: auto;
+        min-height: 0;
+        padding: 1.75rem;
+    }
+
+    .lf-accri-card-featured img {
+        max-height: 100%;
+    }
+}

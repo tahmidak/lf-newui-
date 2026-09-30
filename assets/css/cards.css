@@ -1,0 +1,236 @@
+/* ============================================
+    CARDS
+    abbr: lf-ccard (course), lf-blcard (blog)
+
+    One course card for every grid on the site. The guarantee line and the
+    discount badge are OPTIONAL ROWS of the same card — that is how the
+    bundle card (P8) and the purchase card (P4) are built, so the loop is
+    written once. See INVENTORY.md "Decisions that override the design".
+
+    Shape, per the design: the CARD carries the radius and clips its
+    contents, so the image is flush to the card's top edge and square at
+    the bottom. The image itself has no radius of its own.
+
+    No fixed heights anywhere: real CMS titles run longer than the design's.
+============================================ */
+
+/* ---- Course card --------------------------------------------------- */
+.lf-ccard {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    height: 100%;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+    box-shadow: 0 2px 14px rgba(36, 22, 65, 0.06);
+}
+
+.lf-ccard-media {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.lf-ccard-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.lf-ccard:hover .lf-ccard-img {
+    transform: scale(1.04);
+}
+
+/* Category chip over the image — "Personal Development", "11 Course Bundle" */
+.lf-ccard-chip {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.3rem 0.875rem;
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-white);
+    color: var(--lf-ink);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Optional: "80% OFF" badge, bundle and purchase cards only */
+.lf-ccard-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-purple);
+    color: var(--lf-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+}
+
+.lf-ccard-body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 1rem 1.125rem 1.25rem;
+}
+
+.lf-ccard-title {
+    margin-bottom: 0.625rem;
+    color: var(--lf-purple);
+    font-size: var(--lf-fs-normal);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.lf-ccard-title a:hover {
+    color: var(--lf-purple-mid);
+}
+
+.lf-ccard-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-ccard-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--lf-star);
+    font-weight: 700;
+}
+
+.lf-ccard-pace {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--lf-grey);
+}
+
+/* Rule between the card's rows, as drawn */
+.lf-ccard-hr {
+    height: 1px;
+    margin-block: 0.75rem;
+    border: 0;
+    background-color: var(--lf-purple-light);
+    opacity: 0.3;
+}
+
+/* Optional: "14-Day Money-Back Guarantee" row, bundle and purchase cards */
+.lf-ccard-guarantee {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-bottom: 0;
+    color: var(--lf-green);
+    font-size: var(--lf-fs-sm);
+    text-align: center;
+}
+
+.lf-ccard-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.lf-ccard-price {
+    margin: 0;
+    line-height: 1.2;
+}
+
+.lf-ccard-price-old {
+    display: block;
+    color: var(--lf-grey-muted);
+    font-size: var(--lf-fs-xs);
+    text-decoration: line-through;
+}
+
+.lf-ccard-price-now {
+    display: block;
+    color: var(--lf-purple);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* ---- Blog card ----------------------------------------------------- */
+.lf-blcard {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    height: 100%;
+    padding: 0.75rem;
+    border-radius: var(--lf-radius-xl);
+    background-color: var(--lf-surface);
+    text-align: center;
+}
+
+.lf-blcard-media {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--lf-radius-lg);
+}
+
+.lf-blcard-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+.lf-blcard-title {
+    margin-block: 1rem 0.875rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.lf-blcard-title a:hover {
+    color: var(--lf-purple);
+}
+
+.lf-blcard-btn {
+    align-self: center;
+    margin-top: auto;
+}
+
+/* ---- Card row -------------------------------------------------------
+   Grid on desktop, swipeable row below md. Pure CSS scroll-snap, no JS:
+   the card count stays whatever the CMS prints. Put it on a Bootstrap
+   .row and keep the .col-* classes for the desktop grid. */
+.lf-crow {
+    --lf-crow-card: 78%;
+}
+
+@media (max-width: 767.98px) {
+    .lf-crow {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--lf-gutter);
+        /* Reach the viewport edge so the next card peeks in. */
+        margin-inline: calc(-1 * var(--lf-gutter));
+        padding-inline: var(--lf-gutter);
+        padding-bottom: 0.5rem;
+        scrollbar-width: none;
+    }
+
+    .lf-crow::-webkit-scrollbar {
+        display: none;
+    }
+
+    .lf-crow > * {
+        flex: 0 0 var(--lf-crow-card);
+        scroll-snap-align: start;
+    }
+}

@@ -1,0 +1,238 @@
+/* ============================================
+    HEADER
+    abbr: lf-header
+
+    One markup block for both breakpoints.
+    - lg and up: logo · search pill · nav · cart, one row.
+    - Below lg: logo · search toggle · cart · menu toggle. Search opens as a
+      collapse row under the bar; the nav is a Bootstrap offcanvas that
+      main.js drops directly under the bar.
+
+    Styled through Bootstrap's navbar / nav / offcanvas variables.
+============================================ */
+
+/* ---- Bar ----------------------------------------------------------- */
+.lf-header {
+    position: relative;
+    background-color: var(--lf-white);
+}
+
+.lf-header-bar {
+    --bs-navbar-padding-x: 0;
+    --bs-navbar-padding-y: 0.5rem;
+    --bs-navbar-color: var(--lf-navy);
+    --bs-navbar-hover-color: var(--lf-purple);
+    --bs-navbar-active-color: var(--lf-navy);
+    --bs-navbar-nav-link-padding-x: 0.75rem;
+}
+
+/* ---- Logo ---------------------------------------------------------- */
+/* Every size is in em, so the whole lock-up scales from one font-size.
+   At 1rem: mark 60 × 67px, name 17px, tagline 12px — the desktop PDF. */
+.lf-header-logo {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 0.3em;
+    font-size: 0.6rem;
+    color: var(--lf-purple);
+}
+
+.lf-header-logo:hover {
+    color: var(--lf-purple);
+}
+
+.lf-header-logo-mark {
+    flex-shrink: 0;
+    width: auto;
+    height: 4.1875em;
+}
+
+.lf-header-logo-text {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.1em;
+    font-family: var(--lf-font-logo);
+    line-height: 1.25;
+    white-space: nowrap;
+}
+
+.lf-header-logo-name {
+    font-size: 1.0625em;
+    font-weight: 700;
+}
+
+.lf-header-logo-tagline {
+    font-size: 0.75em;
+}
+
+/* ---- Search --------------------------------------------------------
+   The pill itself is the shared .lf-search component (search.css) — the
+   same one the Home hero uses. This only positions it. Below lg it is a
+   full-width row; the collapse animates this wrapper. */
+.lf-header-search {
+    flex-basis: 100%;
+}
+
+.lf-header-search .lf-search {
+    margin-block: 0.25rem 0.5rem;
+}
+
+/* ---- Nav ----------------------------------------------------------- */
+.lf-header-nav {
+    --bs-nav-link-padding-y: 0.25rem;
+    --bs-nav-link-font-size: var(--lf-fs-normal);
+    --bs-nav-link-font-weight: 400;
+}
+
+.lf-header-link {
+    white-space: nowrap;
+}
+
+/* ---- Icon buttons: search toggle, cart, menu toggle ---------------- */
+.lf-header-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--lf-radius-pill);
+    background: transparent;
+    color: var(--lf-purple);
+}
+
+.lf-header-icon-btn:hover {
+    color: var(--lf-purple-mid);
+}
+
+.lf-header-icon-btn svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+/* Menu toggle swaps hamburger ↔ close. main.js keeps aria-expanded in sync. */
+.lf-header-icon-close,
+.lf-header-icon-btn[aria-expanded="true"] .lf-header-icon-open {
+    display: none;
+}
+
+.lf-header-icon-btn[aria-expanded="true"] .lf-header-icon-close {
+    display: block;
+}
+
+/* ---- Below lg: mobile menu panel ----------------------------------- */
+@media (max-width: 991.98px) {
+    /* --lf-header-menu-top is set on the header by main.js: the bar's bottom
+       edge. Both the panel and its backdrop start there, so the bar stays
+       undimmed and the close toggle stays clickable. (Bootstrap appends the
+       backdrop to the offcanvas's parent, i.e. inside the header, so a
+       z-index on the header can't lift the bar above it.) */
+    .lf-header .offcanvas-backdrop {
+        top: var(--lf-header-menu-top, 0);
+    }
+
+    .lf-header .lf-header-menu {
+        --bs-offcanvas-height: auto;
+        --bs-offcanvas-bg: var(--lf-purple-night);
+        --bs-offcanvas-color: var(--lf-white);
+        --bs-offcanvas-border-width: 0;
+        --bs-offcanvas-padding-x: var(--lf-gutter);
+        --bs-offcanvas-padding-y: 0.5rem;
+        top: var(--lf-header-menu-top, 0);
+        bottom: auto;
+        /* Fade, not slide: a slide from -100% would pass over the bar. */
+        transform: none;
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    }
+
+    .lf-header .lf-header-menu.showing,
+    .lf-header .lf-header-menu.show:not(.hiding) {
+        opacity: 1;
+    }
+
+    .lf-header-nav {
+        --bs-nav-link-color: var(--lf-white);
+        --bs-nav-link-hover-color: var(--lf-white);
+        text-align: center;
+    }
+
+    .lf-header-link:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+    }
+}
+
+@media (max-width: 991.98px) and (prefers-reduced-motion: reduce) {
+    .lf-header .lf-header-menu {
+        transition: none;
+    }
+}
+
+/* ---- lg and up: one row -------------------------------------------- */
+@media (min-width: 992px) {
+    .lf-header-bar {
+        --bs-navbar-padding-y: 1.625rem;
+    }
+
+    .lf-header-logo {
+        font-size: 1rem;
+    }
+
+    .lf-header-search {
+        flex: 0 1 22.125rem;
+        min-width: 10rem;
+        margin-inline-start: 1.5rem;
+    }
+
+    .lf-header-search .lf-search {
+        margin-block: 0;
+    }
+
+    .lf-header-menu {
+        margin-inline-start: 1rem;
+    }
+
+    /* "Hot Deals" blinks between amber and red, the colour sweeping across
+       on the diagonal — the corner wipe in the design's animation frames. */
+    .lf-header-link-hot {
+        --bs-nav-link-hover-color: var(--lf-navy);
+        background-image: linear-gradient(135deg,
+            var(--lf-amber) 0 25%,
+            var(--lf-red) 25% 50%,
+            var(--lf-amber) 50% 75%,
+            var(--lf-red) 75% 100%);
+        background-size: 400% 400%;
+        background-position: 100% 100%;
+        animation: lf-header-hot 4s linear infinite;
+        font-weight: 700;
+    }
+
+    .lf-header-actions {
+        margin-inline-start: 0.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .lf-header-bar {
+        --bs-navbar-nav-link-padding-x: 1.25rem;
+    }
+
+    .lf-header-search {
+        margin-inline-start: 4rem;
+    }
+}
+
+@keyframes lf-header-hot {
+    from { background-position: 100% 100%; }
+    to   { background-position: 0% 0%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lf-header-link-hot {
+        animation: none;
+        background-image: none;
+        background-color: var(--lf-amber);
+    }
+}

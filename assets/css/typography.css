@@ -1,0 +1,119 @@
+/* ============================================
+    TYPOGRAPHY
+    Shared text classes. Every section uses these for its eyebrow,
+    heading and lead copy instead of restyling them locally.
+
+    Eyebrow colour is a MODIFIER, never a utility class: the brand
+    utilities in tokens.css load before this file, so .lf-text-white on
+    a .lf-eyebrow would lose. Use .lf-eyebrow-white / -purple.
+============================================ */
+
+/* Small letter-spaced label above a heading: "QUALITY YOU CAN TRUST" */
+.lf-eyebrow {
+    margin-bottom: 0.75rem;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.lf-eyebrow-purple {
+    color: var(--lf-purple);
+}
+
+.lf-eyebrow-white {
+    color: var(--lf-white);
+}
+
+/* Page h1: "Our Courses", "Blogs by Learning Facility" */
+.lf-page-header {
+    margin-bottom: 0.75rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-page-header);
+}
+
+/* Section h2: "Popular courses", "What our students say" */
+.lf-sec-header {
+    margin-bottom: 0.75rem;
+    color: var(--lf-ink);
+    font-size: 1.75rem;
+}
+
+/* Heading on a full-width colour band: membership, certificate, CTA */
+.lf-band-header {
+    margin-bottom: 1.25rem;
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+/* Hero h1. The design mixes weights inside the line — "Build skills" and
+   "you forward." are heavy, the words between them are not — so the
+   heading itself is set light and <strong> carries the weight. */
+.lf-hero-header {
+    margin-bottom: 1rem;
+    color: var(--lf-ink);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.lf-hero-header strong,
+.lf-band-header strong {
+    font-weight: 700;
+}
+
+.lf-txt-lead {
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-normal);
+    line-height: 1.6;
+}
+
+.lf-txt-normal {
+    font-size: var(--lf-fs-normal);
+    line-height: 1.6;
+}
+
+.lf-txt-sm {
+    font-size: var(--lf-fs-sm);
+    line-height: 1.6;
+}
+
+/* A thick rule under a hero heading, as drawn on Home */
+.lf-rule {
+    width: 12rem;
+    max-width: 60%;
+    height: 4px;
+    margin-block: 1.25rem;
+    border: 0;
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-navy);
+    opacity: 1;
+}
+
+/* Thin rule that opens or closes a section, drawn full container width */
+.lf-hr {
+    height: 1px;
+    margin: 0;
+    border: 0;
+    background-color: var(--lf-blue-deep);
+    opacity: 0.35;
+}
+
+@media (min-width: 992px) {
+    .lf-sec-header {
+        font-size: var(--lf-fs-sec-header);
+    }
+
+    .lf-band-header {
+        font-size: var(--lf-fs-band-header);
+    }
+
+    .lf-hero-header {
+        font-size: var(--lf-fs-hero);
+    }
+
+    .lf-txt-lead {
+        font-size: var(--lf-fs-lead);
+    }
+}

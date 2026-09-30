@@ -1,0 +1,154 @@
+/* ============================================
+    LF — TOKENS
+    The only place colours, radii, type sizes and shadows are defined.
+    Never a raw hex in a section file.
+
+    Provenance: read out of the Canva desktop design (DAHVKxvZrp4) on
+    2026-09-14, from the Cart page (p6) and the Blog listing page (p10).
+
+    - Colours are EXACT — pulled from element fills, not eyeballed.
+    - Type sizes come from p10, which is drawn at true 1440 scale. Rounded
+      to sane values from the raw figures (37.15 → 38, 21.54 → 22, 16.01 → 16).
+    - Radii are INDICATIVE. Canva stores corner rounding in viewBox units on
+      nine-sliced shapes, so it doesn't convert cleanly to px. Confirm each
+      against the section PDF.
+    - Accent colours are almost certainly MISSING. Home and Hot Deals show
+      amber/yellow CTAs that don't appear on the two pages sampled. Add them
+      when those sections are built.
+============================================ */
+
+:root {
+    /* ---- Brand purple ---------------------------------------------- */
+    --lf-purple:        #4a2692;  /* primary — logo, footer, primary button, borders */
+    --lf-purple-mid:    #5e4491;  /* softer purple — card buttons ("Read More") */
+    --lf-purple-light:  #8366bc;  /* pagination outlines + active page fill */
+    --lf-purple-deep:   #241b39;  /* gradient end only, see --lf-grad-search */
+    --lf-purple-dark:   #3b1e75;  /* DERIVED, not in the design — primary button hover */
+    --lf-purple-night:  #331d5e;  /* EYEBALLED from the mobile header PDF — mobile menu panel */
+    --lf-purple-bright: #7a4ddb;  /* brighter purple — 2nd "why learners choose us" card */
+
+    /* ---- Accent ------------------------------------------------------
+       All EYEBALLED from the section PDFs — the Canva API returns no fills.
+       Confirm in the editor before handoff. */
+    --lf-red:           #dc4437;  /* "Hot Deals" nav highlight, "SPECIAL OFFER" ribbon */
+    --lf-amber:         #f6c445;  /* CTA buttons: Get Your Certificate, Discover Membership */
+    --lf-amber-dark:    #e0ab22;  /* amber button hover */
+    --lf-star:          #f5a623;  /* rating stars */
+    --lf-green:         #2e9e5b;  /* money-back guarantee line, tick icons */
+
+    /* ---- Text ------------------------------------------------------ */
+    --lf-ink:           #241641;  /* default body text */
+    --lf-navy:          #031e47;  /* header nav links */
+    --lf-blue-deep:     #163c66;  /* secondary UI text, inactive pagination */
+    --lf-blue-muted:    #4488ae;  /* input placeholder text */
+    --lf-grey:          #555555;  /* headings and card text on light surfaces */
+    --lf-grey-muted:    #737373;  /* de-emphasised figures (discount lines) */
+
+    /* ---- Surfaces -------------------------------------------------- */
+    --lf-bg:            #f1ecfa;  /* lilac tint — light button hover, soft fills */
+    --lf-band-blue:     #dbe6f8;  /* tinted section band — reviews, "momentum" */
+    --lf-surface:       #f4f6fc;  /* card background */
+    --lf-white:         #ffffff;
+    --lf-off-white:     #fafaf9;  /* text on the dark search pill */
+
+    /* ---- Gradients ------------------------------------------------- */
+    /* Header search pill. In the design it sits at 41% opacity with a 1px
+       white stroke — keep the opacity on the element, not in the token. */
+    --lf-grad-search: linear-gradient(180deg, var(--lf-purple) 0%, var(--lf-purple-deep) 100%);
+
+    /* Accreditation badge tiles — light (white) into dark. */
+    --lf-grad-card: linear-gradient(180deg, var(--lf-white) 0%, var(--lf-surface) 100%);
+
+    /* "Why learners choose us" — three different card fills, per the design */
+    --lf-grad-card-deep:   linear-gradient(135deg, #3b1d6e 0%, #2a1250 100%);
+    --lf-grad-card-bright: linear-gradient(135deg, #7c4dd6 0%, #6a3fc0 100%);
+
+    /* ---- Type ------------------------------------------------------ */
+    /* Font families are read off the header/footer PDFs, not Canva (the
+       API returns opaque refs YAFdJuFCnaw, YAFdJjTk5UU).
+       - Lato for UI and body: confident — nav and footer glyphs match.
+       - Open Sans for the logo wordmark: a GUESS. Confirm in the Canva
+         editor's font picker.
+       Both load from Google Fonts in each page's <head>. */
+    --lf-font-body: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --lf-font-logo: "Open Sans", var(--lf-font-body);
+
+    --lf-fs-page-header: 2.375rem;  /* 38px — "Blogs by Learning Facility" */
+    --lf-fs-sec-header:  2.25rem;   /* 36px — section headings */
+    --lf-fs-band-header: 2.75rem;   /* 44px — headings on the full-width CTA bands */
+    --lf-fs-footer-header: 2rem;    /* 32px — footer column headings */
+    --lf-fs-card-title:  1.375rem;  /* 22px */
+    --lf-fs-normal:      1rem;      /* 16px — nav, buttons, body */
+    --lf-fs-sm:          0.9375rem; /* 15px — footer links */
+    --lf-fs-xs:          0.75rem;   /* 12px — logo tagline, eyebrows */
+    --lf-fs-hero:        3rem;      /* 48px — page hero h1 */
+    --lf-fs-lead:        1.125rem;  /* 18px — hero and section lead copy */
+    --lf-fs-band:        1rem;      /* 16px — body copy inside the CTA bands */
+
+    --lf-lh-heading: 1.32;
+    --lf-lh-body:    1.4;
+    --lf-lh-links:   2.18;  /* footer link lists, from the design */
+
+    /* ---- Radii (confirm against the PDFs) -------------------------- */
+    --lf-radius-sm:   0.5rem;   /* 8px */
+    --lf-radius:      0.75rem;  /* 12px */
+    --lf-radius-lg:   1.25rem;  /* 20px — card media block */
+    --lf-radius-xl:   1.75rem;  /* 28px — outer card */
+    --lf-radius-pill: 9999px;   /* every button in the design is a full pill */
+
+    /* ---- Shadows / focus ------------------------------------------- */
+    --lf-focus-ring: rgba(74, 38, 146, 0.35);  /* --lf-purple at 35% */
+
+    /* ---- Layout ---------------------------------------------------- */
+    /* Content width measured from p10: the 3-up blog grid spans 1232px and
+       the header row spans 1241px on a 1440 artboard. The design's own side
+       gutters wander between 101px and 141px — 1240 is the middle of it.
+       See CLAUDE.md; .lf-container lives in base.css. */
+    --lf-container: 1240px;
+    --lf-gutter:    1.5rem;  /* side padding on .lf-container, all breakpoints */
+
+    /* Vertical rhythm between sections. p10 gaps measure 63–71px at
+       desktop; mobile steps down. */
+    --lf-sec-y:    3rem;    /* 48px below lg */
+    --lf-sec-y-lg: 4.25rem; /* 68px from lg */
+
+    /* ---- Bootstrap global overrides -------------------------------- */
+    --bs-body-bg: var(--lf-white);  /* pages are white in the PDFs; bands set their own */
+    --bs-body-color: var(--lf-ink);
+    --bs-body-font-family: var(--lf-font-body);
+    --bs-body-font-size: var(--lf-fs-normal);
+    --bs-body-line-height: var(--lf-lh-body);
+    --bs-border-radius: var(--lf-radius);
+    --bs-border-radius-sm: var(--lf-radius-sm);
+    --bs-border-radius-lg: var(--lf-radius-lg);
+    --bs-border-radius-pill: var(--lf-radius-pill);
+    --bs-link-color: var(--lf-purple);
+    --bs-link-hover-color: var(--lf-purple-mid);
+}
+
+/* ============================================
+    BRAND UTILITIES
+    Bootstrap's bg-* / text-* utilities read --bs-*-rgb and a new theme
+    colour can't be added without SCSS, so brand colours get their own
+    classes here. See CLAUDE.md.
+
+    NOT in a cascade layer: layered rules lose to every unlayered rule,
+    Bootstrap's included, whatever the specificity — so a layered
+    .lf-text-white could never win against .nav-link.
+============================================ */
+
+.lf-bg-page     { background-color: var(--lf-bg); }
+.lf-bg-surface  { background-color: var(--lf-surface); }
+.lf-bg-purple   { background-color: var(--lf-purple); }
+.lf-bg-night    { background-color: var(--lf-purple-night); }
+.lf-bg-band     { background-color: var(--lf-band-blue); }
+.lf-bg-white    { background-color: var(--lf-white); }
+
+.lf-text-purple { color: var(--lf-purple); }
+.lf-text-ink    { color: var(--lf-ink); }
+.lf-text-navy   { color: var(--lf-navy); }
+.lf-text-grey   { color: var(--lf-grey); }
+.lf-text-muted  { color: var(--lf-grey-muted); }
+.lf-text-white  { color: var(--lf-white); }
+.lf-text-amber  { color: var(--lf-amber); }
+.lf-text-green  { color: var(--lf-green); }

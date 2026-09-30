@@ -1,0 +1,193 @@
+/* ============================================
+    SINGLE COURSE
+    Page sections: lf-sc-main (the two-column row), lf-sc-hi (title +
+    overview), lf-sc-mod (course modules), lf-sc-sidebar (purchase card),
+    lf-sc-sim (similar courses).
+    Universal sections used here: lf-cert, lf-accri, lf-faq, lf-rev.
+
+    Layout, as briefed: one row, two columns.
+      left  — h1, "A Closer Look at the Course" overview (clamped, with
+              See More / See Less) and the modules list underneath
+      right — a full-height sidebar holding a sticky purchase card
+
+    MODULES: the markup uses Tutor LMS's own class names, so that
+    tutor_course_topics() output drops straight in and inherits this
+    styling — .tutor-accordion, .tutor-accordion-item,
+    .tutor-accordion-item-header (+ .is-active), .tutor-accordion-item-body,
+    .tutor-course-content-list, .tutor-course-content-list-item and its
+    -icon / -title / -duration children. Tutor's own JS runs the open and
+    close in WordPress; assets/js/topics.js only stands in for it here.
+============================================ */
+
+/* ---- Two-column row ------------------------------------------------ */
+.lf-sc-hi-title {
+    margin-bottom: 1.5rem;
+    color: var(--lf-purple);
+    font-size: 1.75rem;
+    line-height: 1.3;
+}
+
+/* The overview clamps, then opens — see expand.css */
+.lf-sc-overview {
+    --lf-expand-h: 15rem;
+    --lf-expand-fade: var(--lf-bg);
+}
+
+.lf-sc-overview-btn {
+    margin-top: 0.25rem;
+}
+
+/* ---- Sidebar ------------------------------------------------------- */
+/* Full height comes from the grid: a .row is a flex container and its
+   columns stretch by default, so the sidebar matches the tall left column
+   and the card has a runway to stick along.
+   Do NOT put height: 100% here — a flex item with a definite height opts
+   out of align-items: stretch, and 100% of the row's auto height collapses
+   to the card's own height, which kills the sticky. */
+.lf-sc-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.lf-sc-card {
+    max-width: 21rem;
+    margin-inline: auto;
+    margin-block: 2rem;
+}
+
+/* ---- Modules: lf-sc-mod (Tutor LMS classes) ------------------------ */
+.lf-sc-mod {
+    margin-top: 3rem;
+}
+
+.lf-sc-mod-head {
+    margin-bottom: 1.5rem;
+}
+
+.lf-sc-mod .tutor-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.lf-sc-mod .tutor-accordion-item {
+    overflow: hidden;
+    border-radius: var(--lf-radius);
+    background-color: var(--lf-white);
+}
+
+.lf-sc-mod .tutor-accordion-item-header {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 0.875rem 1.25rem;
+    border: 0;
+    background-color: var(--lf-surface);
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+.lf-sc-mod .tutor-accordion-item-header.is-active {
+    color: var(--lf-purple);
+}
+
+/* Tutor prints its own caret; this is ours for the static template */
+.lf-sc-mod-caret {
+    flex-shrink: 0;
+    color: var(--lf-purple);
+    font-size: 0.75rem;
+    transition: transform 0.25s ease;
+}
+
+.lf-sc-mod .tutor-accordion-item-header.is-active .lf-sc-mod-caret {
+    transform: rotate(180deg);
+}
+
+.lf-sc-mod-num {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-purple);
+    color: var(--lf-white);
+    font-size: var(--lf-fs-xs);
+}
+
+.lf-sc-mod-name {
+    flex: 1;
+    font-weight: 700;
+}
+
+.lf-sc-mod-time {
+    color: var(--lf-grey-muted);
+    font-size: var(--lf-fs-xs);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.lf-sc-mod .tutor-accordion-item-body {
+    background-color: var(--lf-white);
+}
+
+.lf-sc-mod .tutor-course-content-list {
+    margin: 0;
+    padding: 0.5rem 0;
+    list-style: none;
+}
+
+.lf-sc-mod .tutor-course-content-list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1.25rem;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-sc-mod .tutor-course-content-list-item + .tutor-course-content-list-item {
+    border-top: 1px solid var(--lf-bg);
+}
+
+.lf-sc-mod .tutor-course-content-list-item-icon {
+    flex-shrink: 0;
+    color: var(--lf-purple);
+}
+
+.lf-sc-mod .tutor-course-content-list-item-title {
+    flex: 1;
+    margin-bottom: 0;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+    font-weight: 400;
+}
+
+.lf-sc-mod .tutor-course-content-list-item-duration {
+    color: var(--lf-grey-muted);
+    font-size: var(--lf-fs-xs);
+    font-variant-numeric: tabular-nums;
+}
+
+.lf-sc-mod .tutor-course-content-list-item-status {
+    color: var(--lf-grey-muted);
+}
+
+@media (min-width: 992px) {
+    .lf-sc-hi-title {
+        font-size: 2.25rem;
+    }
+
+    .lf-sc-card {
+        position: sticky;
+        top: 1.5rem;
+        margin-block: 0;
+        margin-inline: auto 0;
+    }
+}

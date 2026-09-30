@@ -1,0 +1,103 @@
+/* ============================================
+    SEARCH PILL
+    abbr: lf-search
+    Universal. Header, Home hero, Popular courses, All Courses.
+
+    Two variants, both drawn in the design:
+    - default: the purple gradient pill at 41% with a 1px white stroke.
+      The opacity sits on a pseudo-element so text and icon stay solid.
+    - .lf-search-light: white pill with a purple outline, used where the
+      pill sits on a light section (Popular courses, All Courses).
+============================================ */
+
+.lf-search {
+    --lf-search-height: 2.625rem;
+    --lf-search-pad-x: 1.375rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.lf-search::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--lf-white);
+    border-radius: var(--lf-radius-pill);
+    background: var(--lf-grad-search);
+    opacity: 0.41;
+    pointer-events: none;
+}
+
+.lf-search-input {
+    position: relative;
+    width: 100%;
+    min-height: var(--lf-search-height);
+    padding: 0.5rem 3rem 0.5rem var(--lf-search-pad-x);
+    border: 0;
+    border-radius: var(--lf-radius-pill);
+    background: transparent;
+    color: var(--lf-off-white);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-search-input::placeholder {
+    color: var(--lf-off-white);
+    opacity: 0.95;
+}
+
+.lf-search-input:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem var(--lf-focus-ring);
+}
+
+/* Hide the browser's own clear button — the pill has its own icon. */
+.lf-search-input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+.lf-search-btn {
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--lf-radius-pill);
+    background: transparent;
+    color: var(--lf-white);
+    font-size: 1.0625rem;
+}
+
+/* ---- Light variant ------------------------------------------------- */
+.lf-search-light::before {
+    content: none;
+}
+
+.lf-search-light .lf-search-input {
+    border: 1px solid var(--lf-purple-light);
+    background-color: var(--lf-white);
+    color: var(--lf-ink);
+}
+
+.lf-search-light .lf-search-input::placeholder {
+    color: var(--lf-grey-muted);
+    opacity: 1;
+}
+
+.lf-search-light .lf-search-btn {
+    color: var(--lf-purple);
+}
+
+.lf-search-sm {
+    --lf-search-height: 2.25rem;
+    --lf-search-pad-x: 1.125rem;
+}
+
+.lf-search-sm .lf-search-input {
+    font-size: var(--lf-fs-xs);
+}

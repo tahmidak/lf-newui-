@@ -1,0 +1,54 @@
+/* ============================================
+    CERTIFICATE CTA
+    abbr: lf-cert
+    Universal. Home, Hot Deals, Single Course.
+    Text left, framed certificate right; stacks with the image first
+    below lg, as the mobile PDF draws it.
+============================================ */
+
+.lf-cert-header {
+    margin-bottom: 1.25rem;
+    color: var(--lf-ink);
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.lf-cert-text {
+    max-width: 32rem;
+    margin-bottom: 1.75rem;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-normal);
+    line-height: 1.7;
+}
+
+.lf-cert-media {
+    text-align: center;
+}
+
+/* Capped so the framed certificate never dominates the row — the design
+   keeps it roughly the height of the text block beside it. */
+.lf-cert-img {
+    width: auto;
+    max-width: 100%;
+    max-height: 26rem;
+}
+
+@media (max-width: 991.98px) {
+    .lf-cert-body {
+        text-align: center;
+    }
+
+    .lf-cert-text {
+        margin-inline: auto;
+    }
+
+    .lf-cert-img {
+        max-height: 20rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .lf-cert-header {
+        font-size: 2.875rem;
+    }
+}

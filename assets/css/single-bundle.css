@@ -1,0 +1,539 @@
+/* ============================================
+    SINGLE BUNDLE
+    Page sections: lf-sb-hi (hero + pricing card), lf-sb-road (career
+    roadmap), lf-sb-crs (the courses slider), lf-sb-path (career
+    pathway), lf-sb-cmp (value comparison), lf-sb-stats (stats strip),
+    lf-sb-float (floating CTA).
+    Universal section used here: lf-accri.
+
+    Layout follows the reference build; every colour comes from the Canva
+    PDF — the hero sits on the page background, not a dark band, and the
+    accent is brand purple, never the reference's orange.
+============================================ */
+
+/* ---- Hero: lf-sb-hi ------------------------------------------------ */
+.lf-sb-hi-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.lf-sb-hi-badge {
+    padding: 0.35rem 1rem;
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-purple);
+    color: var(--lf-white);
+    font-size: var(--lf-fs-xs);
+    font-weight: 700;
+}
+
+.lf-sb-hi-level {
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+    font-weight: 700;
+}
+
+.lf-sb-hi-header {
+    margin-bottom: 1rem;
+    color: var(--lf-ink);
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.lf-sb-hi-text {
+    max-width: 34rem;
+    margin-bottom: 1.75rem;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+    line-height: 1.8;
+}
+
+.lf-sb-hi-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lf-sb-hi-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--lf-purple-light);
+    border-radius: var(--lf-radius-lg);
+    object-fit: cover;
+}
+
+/* ---- Pricing card -------------------------------------------------- */
+.lf-sb-price {
+    padding: 1.5rem 1.625rem;
+    border-radius: var(--lf-radius-xl);
+    background-color: var(--lf-white);
+    box-shadow: 0 6px 30px rgba(36, 22, 65, 0.1);
+}
+
+.lf-sb-price-top {
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+    margin-bottom: 0.25rem;
+}
+
+.lf-sb-price-was {
+    color: var(--lf-grey-muted);
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-decoration: line-through;
+}
+
+.lf-sb-price-now {
+    color: var(--lf-purple);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.lf-sb-price-save {
+    margin-bottom: 1rem;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-sb-price-list {
+    margin: 0 0 0.875rem;
+    padding: 0;
+    list-style: none;
+}
+
+.lf-sb-price-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding-block: 0.2rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-sb-price-list i {
+    color: var(--lf-purple);
+}
+
+.lf-sb-price-guarantee {
+    margin-bottom: 1rem;
+    color: var(--lf-green);
+    font-size: var(--lf-fs-xs);
+}
+
+.lf-sb-price-btn {
+    width: 100%;
+    letter-spacing: 0.02em;
+}
+
+/* ---- Career roadmap: lf-sb-road ------------------------------------ */
+.lf-sb-road-card {
+    height: 100%;
+    padding: 1.75rem 1.5rem;
+    border: 1px solid var(--lf-purple-light);
+    border-radius: var(--lf-radius-xl);
+    background-color: var(--lf-white);
+    text-align: center;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lf-sb-road-card:hover {
+    border-color: var(--lf-purple);
+    box-shadow: 0 8px 24px rgba(36, 22, 65, 0.1);
+}
+
+.lf-sb-road-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.125rem;
+    height: 3.125rem;
+    margin-bottom: 0.875rem;
+    border: 2px solid var(--lf-purple-light);
+    border-radius: var(--lf-radius-pill);
+    color: var(--lf-purple);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.lf-sb-road-title {
+    margin-bottom: 0.375rem;
+    color: var(--lf-ink);
+    font-size: 1.125rem;
+}
+
+.lf-sb-road-text {
+    margin-bottom: 0;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+}
+
+/* ---- Courses slider: lf-sb-crs -------------------------------------
+   All 16 courses ride in a Swiper (assets/js/bundle-slider.js) — no
+   "view all" button. Card D: no price, no rating, no button. */
+.lf-sb-crs-slider {
+    position: relative;
+}
+
+.lf-sb-crs-swiper {
+    overflow: hidden;
+}
+
+.lf-sb-crs-swiper .swiper-slide {
+    height: auto;
+}
+
+.lf-sb-crs-card {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    height: 100%;
+    border-radius: var(--lf-radius);
+    background-color: var(--lf-white);
+    box-shadow: 0 2px 12px rgba(36, 22, 65, 0.08);
+    text-align: left;
+}
+
+.lf-sb-crs-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+.lf-sb-crs-body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 0.75rem 0.875rem 0.875rem;
+}
+
+.lf-sb-crs-title {
+    margin-bottom: 0.75rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+    line-height: 1.45;
+}
+
+.lf-sb-crs-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.lf-sb-crs-level {
+    padding: 0.15rem 0.625rem;
+    border-radius: var(--lf-radius-sm);
+    background-color: var(--lf-purple);
+    color: var(--lf-white);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.lf-sb-crs-level-beginner { background-color: var(--lf-green); }
+.lf-sb-crs-level-advanced { background-color: var(--lf-red); }
+.lf-sb-crs-level-all      { background-color: var(--lf-ink); }
+
+.lf-sb-crs-time {
+    color: var(--lf-grey-muted);
+    font-size: var(--lf-fs-xs);
+}
+
+.lf-sb-crs-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-white);
+    color: var(--lf-purple);
+    box-shadow: 0 2px 10px rgba(36, 22, 65, 0.12);
+    font-size: 1.125rem;
+}
+
+.lf-sb-crs-nav:hover {
+    background-color: var(--lf-purple);
+    color: var(--lf-white);
+}
+
+.lf-sb-crs-nav:disabled {
+    opacity: 0.35;
+}
+
+/* ---- Career pathway: lf-sb-path ------------------------------------
+   A numbered column, as the design draws it — not a row of tiles. */
+.lf-sb-path-list {
+    max-width: 36rem;
+    margin: 1.5rem auto 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.lf-sb-path-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-block: 0.5rem;
+}
+
+.lf-sb-path-num {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 2px solid var(--lf-purple);
+    border-radius: var(--lf-radius-pill);
+    color: var(--lf-purple);
+    font-size: var(--lf-fs-normal);
+    font-weight: 700;
+}
+
+.lf-sb-path-label {
+    flex: 1;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--lf-purple-light);
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-white);
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+}
+
+/* ---- Value comparison: lf-sb-cmp ----------------------------------- */
+.lf-sb-cmp-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 1.5rem;
+    max-width: 44rem;
+    margin-inline: auto;
+}
+
+.lf-sb-cmp-box {
+    width: 100%;
+    max-width: 21rem;
+    height: 100%;
+    padding: 1.75rem;
+    border-radius: var(--lf-radius-xl);
+    background-color: var(--lf-surface);
+    text-align: left;
+}
+
+.lf-sb-cmp-box-featured {
+    border: 2px solid var(--lf-purple);
+    background-color: var(--lf-white);
+}
+
+.lf-sb-cmp-title {
+    margin-bottom: 0.875rem;
+    color: var(--lf-ink);
+    font-size: 1.25rem;
+}
+
+.lf-sb-cmp-box-featured .lf-sb-cmp-title {
+    color: var(--lf-purple);
+}
+
+.lf-sb-cmp-list {
+    margin: 0 0 0.875rem;
+    padding: 0;
+    list-style: none;
+}
+
+.lf-sb-cmp-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding-block: 0.2rem;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-sb-cmp-box-featured .lf-sb-cmp-list i {
+    color: var(--lf-purple);
+}
+
+.lf-sb-cmp-total {
+    margin-bottom: 0;
+    color: var(--lf-grey-muted);
+    font-size: 1.375rem;
+    font-weight: 600;
+}
+
+.lf-sb-cmp-price {
+    margin-bottom: 0.25rem;
+    color: var(--lf-purple);
+    font-size: 1.625rem;
+    font-weight: 700;
+}
+
+.lf-sb-cmp-save {
+    margin-bottom: 1.25rem;
+    color: var(--lf-green);
+    font-size: var(--lf-fs-sm);
+    font-weight: 600;
+}
+
+/* ---- Stats strip: lf-sb-stats -------------------------------------- */
+.lf-sb-stats-box {
+    padding: 1.75rem 1rem 1.25rem;
+    border: 1px solid var(--lf-purple-light);
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+    text-align: center;
+}
+
+.lf-sb-stats-val {
+    margin-bottom: 0.125rem;
+    color: var(--lf-purple);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.lf-sb-stats-stars {
+    margin-bottom: 0.125rem;
+}
+
+.lf-sb-stats-label {
+    margin-bottom: 0;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+}
+
+/* ---- Floating CTA: lf-sb-float -------------------------------------
+   Slides in from the right and slides back out the same way — the exit
+   is animated, not a cut. assets/js/bundle-cta.js flips the class. */
+.lf-sb-float {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 1030;
+    width: 16rem;
+    transform: translateY(1.25rem) scale(0.96);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.3s ease,
+                visibility 0.35s;
+    visibility: hidden;
+}
+
+.lf-sb-float-open {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+.lf-sb-float-card {
+    padding: 1.25rem;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+    box-shadow: 0 12px 34px rgba(36, 22, 65, 0.22);
+}
+
+.lf-sb-float-title {
+    margin-bottom: 0.375rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-sb-float-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.625rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+    font-weight: 700;
+}
+
+/* ---- Phone bar ----------------------------------------------------- */
+.lf-sb-float-phone {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 1030;
+    padding: 0.75rem var(--lf-gutter);
+    border-radius: var(--lf-radius-lg) var(--lf-radius-lg) 0 0;
+    background-color: var(--lf-white);
+    box-shadow: 0 -8px 24px rgba(36, 22, 65, 0.18);
+    transform: translateY(110%);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lf-sb-float-phone-open {
+    transform: translateY(0);
+}
+
+.lf-sb-float-phone-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.lf-sb-float-phone-title {
+    margin-bottom: 0.125rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+    font-weight: 700;
+}
+
+.lf-sb-float-phone-price {
+    margin-bottom: 0;
+    color: var(--lf-purple);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+/* One or the other, never both */
+@media (max-width: 991.98px) {
+    .lf-sb-float {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .lf-sb-cmp-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .lf-sb-float-phone {
+        display: none;
+    }
+
+    .lf-sb-hi-header {
+        font-size: 2.75rem;
+    }
+
+    .lf-sb-price {
+        position: sticky;
+        top: 1.5rem;
+    }
+
+    .lf-sb-stats-val {
+        font-size: 2.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lf-sb-float,
+    .lf-sb-float-phone {
+        transition: none;
+    }
+}

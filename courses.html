@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Courses - Learning Facility</title>
+
+    <!-- Fonts: Lato (UI/body), Open Sans (logo wordmark) — see tokens.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ============================================
+        HEADER
+        abbr: lf-header
+        Bootstrap JS doing real work here:
+        - offcanvas: the mobile menu (#lfHeaderMenu)
+        - collapse:  the mobile search row (#lfHeaderSearch)
+    ============================================ -->
+    <header class="lf-header" data-lf-header>
+        <nav class="navbar navbar-expand-lg lf-header-bar" aria-label="Main">
+            <div class="lf-container d-flex flex-wrap flex-lg-nowrap align-items-center">
+
+                <!-- DYNAMIC: home_url() -->
+                <!-- The mark is a traced placeholder — swap for the real logo file. -->
+                <a class="lf-header-logo" href="home.html">
+                    <svg class="lf-header-logo-mark" viewBox="0 0 213 238" aria-hidden="true" focusable="false">
+                        <path fill="currentColor" d="M0 65 28 29v139l37 33V108h25v129A119 119 0 0 1 0 173Z"/>
+                        <path fill="currentColor" d="M110 0a119 119 0 0 1 95 52l-24 16a91 91 0 0 0-43-34v69h67v30h-67v101l-28 4Z"/>
+                    </svg>
+                    <span class="lf-header-logo-text">
+                        <span class="lf-header-logo-name">Learning Facility</span>
+                        <span class="lf-header-logo-tagline">Your key to lifelong learning</span>
+                    </span>
+                </a>
+
+                <!-- Search: always visible from lg; a collapse row below lg -->
+                <div class="collapse d-lg-block order-last order-lg-0 lf-header-search" id="lfHeaderSearch">
+                    <!-- DYNAMIC: action = home_url('/'), post_type = Tutor LMS courses -->
+                    <form class="lf-search" role="search" action="#" method="get">
+                        <label class="visually-hidden" for="lfHeaderSearchInput">Search courses</label>
+                        <input class="lf-search-input" id="lfHeaderSearchInput" type="search" name="s" placeholder="Search Courses ...">
+                        <input type="hidden" name="post_type" value="courses">
+                        <button class="lf-search-btn" type="submit" aria-label="Search"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Nav: inline from lg; an offcanvas panel below lg -->
+                <div class="offcanvas offcanvas-top lf-header-menu" id="lfHeaderMenu" tabindex="-1" aria-label="Main menu" data-lf-header-menu>
+                    <div class="offcanvas-body">
+                        <!-- DYNAMIC: wp_nav_menu( primary ) — one <li> per menu item -->
+                        <ul class="navbar-nav ms-lg-auto lf-header-nav">
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link" href="home.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link lf-header-link-hot" href="hot-deals.html">Hot Deals<span aria-hidden="true">🔥</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link lf-header-link" href="courses.html" aria-current="page">All Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <!-- DYNAMIC: login / dashboard link depending on is_user_logged_in() -->
+                                <a class="nav-link lf-header-link" href="#">Log In/Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center ms-auto lf-header-actions">
+                    <button class="lf-header-icon-btn d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#lfHeaderSearch" aria-controls="lfHeaderSearch" aria-expanded="false" aria-label="Search courses">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <circle cx="10.5" cy="10.5" r="7"/>
+                            <path d="m15.75 15.75 5.25 5.25"/>
+                        </svg>
+                    </button>
+
+                    <!-- DYNAMIC: wc_get_cart_url() -->
+                    <a class="lf-header-icon-btn" href="cart.html" aria-label="Cart">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                            <path d="M1.5 2.5h2.75l2.5 12.5h12.5l2.5-9H5.5"/>
+                            <circle cx="9" cy="19.75" r="1.75"/>
+                            <circle cx="17" cy="19.75" r="1.75"/>
+                        </svg>
+                    </a>
+
+                    <button class="lf-header-icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#lfHeaderMenu" aria-controls="lfHeaderMenu" aria-expanded="false" aria-label="Menu">
+                        <svg class="lf-header-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <path d="M3 5h18M3 12h18M3 19h18"/>
+                        </svg>
+                        <svg class="lf-header-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true" focusable="false">
+                            <path d="M5 5l14 14M19 5 5 19"/>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ============================================
+            PAGE HEADER — lf-ac-h
+        ============================================ -->
+        <section class="lf-section pb-0 lf-ac-h">
+            <div class="lf-container">
+                <p class="lf-eyebrow">Find your next opportunity</p>
+                <h1 class="lf-page-header">Our Courses</h1>
+                <p class="lf-txt-sm lf-text-grey mb-0">Explore our most-loved training and start building a more capable future.</p>
+            </div>
+        </section>
+
+        <!-- ============================================
+            CATEGORY FILTER — lf-ac-cat
+            One list for both breakpoints: a collapse below lg (with the
+            mobile design's "Search category" box), always open from lg.
+            Bootstrap JS doing real work: collapse.
+        ============================================ -->
+        <section class="lf-section pb-0 lf-ac-cat">
+            <div class="lf-container">
+                <div class="collapse d-lg-block" id="lfCategories">
+                    <form class="lf-ac-cat-search d-lg-none" role="search" action="#" method="get">
+                        <label class="visually-hidden" for="lfCategorySearch">Search category</label>
+                        <input class="lf-ac-cat-search-input" id="lfCategorySearch" type="search" name="category" placeholder="Search category">
+                        <button class="lf-ac-cat-search-btn" type="submit" aria-label="Search categories"><i class="bi bi-search"></i></button>
+                    </form>
+
+                    <!-- DYNAMIC: course category terms -->
+                    <!-- LOOP START: category -->
+                    <ul class="lf-ac-cat-list">
+                            <li><a class="lf-ac-cat-link active" href="#" aria-current="page">All Courses</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                            <li><a class="lf-ac-cat-link" href="#">Category Name</a></li>
+                    </ul>
+                    <!-- LOOP END -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            SEARCH + SORT — lf-ac-bar
+            Bootstrap JS doing real work: dropdown.
+        ============================================ -->
+        <section class="lf-section pb-0 lf-ac-grid">
+            <div class="lf-container">
+                <div class="lf-ac-bar">
+                    <form class="lf-ac-bar-search" role="search" action="#" method="get">
+                        <label class="visually-hidden" for="lfCoursesSearch">Search courses</label>
+                        <input class="lf-ac-bar-search-input" id="lfCoursesSearch" type="search" name="s" placeholder="Search Courses ...">
+                        <input type="hidden" name="post_type" value="courses">
+                        <button class="lf-ac-bar-search-btn" type="submit" aria-label="Search"><i class="bi bi-search"></i></button>
+                    </form>
+
+                    <div class="lf-ac-bar-controls">
+                    <div class="dropdown lf-ac-sort">
+                        <button class="lf-ac-sort-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sort By
+                        </button>
+                        <!-- DYNAMIC: orderby query args -->
+                        <ul class="dropdown-menu dropdown-menu-end lf-ac-sort-menu">
+                            <li><a class="dropdown-item" href="#">Sort A to Z</a></li>
+                            <li><a class="dropdown-item active" href="#">Best Selling</a></li>
+                            <li><a class="dropdown-item" href="#">Oldest to Newest</a></li>
+                            <li><a class="dropdown-item" href="#">Newest to Oldest</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Below lg this opens the category list above; from lg the
+                         list is always open and this button is not shown. -->
+                    <button class="lf-ac-sort-btn d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#lfCategories" aria-controls="lfCategories" aria-expanded="false">
+                        Search category <i class="bi bi-caret-down-fill"></i>
+                    </button>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <!-- LOOP START: course card -->
+                        <article class="lf-ccard">
+                            <a class="lf-ccard-media" href="course.html">
+                                <!-- DYNAMIC: course thumbnail -->
+                                <img class="lf-ccard-img" src="assets/imgs/course-thumb.png" alt="">
+                                <!-- DYNAMIC: course category -->
+                                <span class="lf-ccard-chip">Personal Development</span>
+                            </a>
+                            <div class="lf-ccard-body">
+                                <h3 class="lf-ccard-title">
+                                    <!-- DYNAMIC: course_title -->
+                                    <a href="course.html">Parenting and Awareness Online Course</a>
+                                </h3>
+                                <div class="lf-ccard-meta">
+                                    <span class="lf-ccard-rating"><i class="bi bi-star-fill"></i> 4.5</span>
+                                    <span class="lf-ccard-pace"><i class="bi bi-bar-chart-fill"></i> Self-Paced</span>
+                                </div>
+                                <hr class="lf-ccard-hr">
+                                <div class="lf-ccard-foot">
+                                    <p class="lf-ccard-price">
+                                        <!-- DYNAMIC: regular price / sale price -->
+                                        <span class="lf-ccard-price-old">&pound;89.00</span>
+                                        <span class="lf-ccard-price-now">&pound;14.00</span>
+                                    </p>
+                                    <a class="btn lf-btn lf-btn-primary lf-btn-sm" href="#">Add to Cart</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- LOOP END -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+            PAGINATION — universal (lf-pagi)
+        ============================================ -->
+        <section class="lf-section">
+            <div class="lf-container">
+                <!-- DYNAMIC: the_posts_pagination() -->
+                <nav aria-label="Pagination">
+                    <ul class="pagination lf-pagi">
+                        <li class="page-item lf-pagi-edge"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item lf-pagi-gap"><span class="page-link">..........</span></li>
+                        <li class="page-item"><a class="page-link" href="#">73</a></li>
+                        <li class="page-item lf-pagi-edge"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================
+        FOOTER
+        abbr: lf-footer
+    ============================================ -->
+    <footer class="lf-section lf-footer lf-bg-purple">
+        <div class="lf-container">
+            <div class="row gy-5">
+
+                <div class="col-12 col-lg-4 col-xl-3">
+                    <!-- DYNAMIC: home_url() -->
+                    <!-- The mark is a traced placeholder — swap for the real logo file. -->
+                    <a class="lf-footer-logo" href="home.html">
+                        <svg class="lf-footer-logo-mark" viewBox="0 0 213 238" aria-hidden="true" focusable="false">
+                            <path fill="currentColor" d="M0 65 28 29v139l37 33V108h25v129A119 119 0 0 1 0 173Z"/>
+                            <path fill="currentColor" d="M110 0a119 119 0 0 1 95 52l-24 16a91 91 0 0 0-43-34v69h67v30h-67v101l-28 4Z"/>
+                        </svg>
+                        <span class="lf-footer-logo-text">
+                            <span class="lf-footer-logo-name">Learning Facility</span>
+                            <span class="lf-footer-logo-tagline">Your key to lifelong learning</span>
+                        </span>
+                    </a>
+                </div>
+
+                <nav class="col-md-6 col-lg-4 col-xl-3" aria-labelledby="lfFooterTermsTitle">
+                    <h2 class="lf-footer-title" id="lfFooterTermsTitle">Our Terms</h2>
+                    <!-- DYNAMIC: wp_nav_menu( footer-terms ) -->
+                    <ul class="lf-footer-links">
+                        <li><a class="lf-footer-link" href="#">Terms and Conditions</a></li>
+                        <li><a class="lf-footer-link" href="#">Privacy Policy</a></li>
+                        <li><a class="lf-footer-link" href="#">Disclaimer</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="col-md-6 col-lg-4 col-xl-3" aria-labelledby="lfFooterLinksTitle">
+                    <h2 class="lf-footer-title" id="lfFooterLinksTitle">Important Links</h2>
+                    <!-- DYNAMIC: wp_nav_menu( footer-links ) -->
+                    <ul class="lf-footer-links">
+                        <li><a class="lf-footer-link" href="#">Contact</a></li>
+                        <li><a class="lf-footer-link" href="blog.html">Blogs</a></li>
+                        <li><a class="lf-footer-link" href="#">Certificate Order</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

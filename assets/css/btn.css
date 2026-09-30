@@ -1,0 +1,135 @@
+/* ============================================
+    BUTTONS
+    abbr: lf-btn
+    Every button in the design is a full pill.
+
+    Each variant is a set of Bootstrap button variables — no overrides,
+    no !important. Always pair with Bootstrap's .btn:
+
+        <a class="btn lf-btn lf-btn-primary" href="#">Browse Courses</a>
+        <button class="btn lf-btn lf-btn-outline lf-btn-sm">Apply</button>
+
+    MISSING: the amber/yellow CTA seen on Home and Hot Deals. Add it as
+    .lf-btn-accent once its colour is in tokens.css.
+============================================ */
+
+/* ---- Base: shape and type, shared by every variant ----------------- */
+.lf-btn {
+    --bs-btn-padding-x: 1.75rem;
+    --bs-btn-padding-y: 0.625rem;
+    --bs-btn-font-family: var(--lf-font-body);
+    --bs-btn-font-size: var(--lf-fs-normal);
+    --bs-btn-font-weight: 700;
+    --bs-btn-line-height: var(--lf-lh-body);
+    --bs-btn-border-width: 1px;
+    --bs-btn-border-radius: var(--lf-radius-pill);
+    --bs-btn-focus-box-shadow: 0 0 0 0.25rem var(--lf-focus-ring);
+    --bs-btn-disabled-opacity: 0.55;
+}
+
+/* ---- Sizes --------------------------------------------------------- */
+.lf-btn-sm {
+    --bs-btn-padding-x: 1.25rem;
+    --bs-btn-padding-y: 0.375rem;
+    --bs-btn-font-size: var(--lf-fs-sm);
+}
+
+.lf-btn-lg {
+    --bs-btn-padding-x: 2.25rem;
+    --bs-btn-padding-y: 0.875rem;
+    --bs-btn-font-size: 1.125rem;
+}
+
+/* ---- Primary: solid brand purple ----------------------------------- */
+.lf-btn-primary {
+    --bs-btn-color: var(--lf-white);
+    --bs-btn-bg: var(--lf-purple);
+    --bs-btn-border-color: var(--lf-purple);
+    --bs-btn-hover-color: var(--lf-white);
+    --bs-btn-hover-bg: var(--lf-purple-dark);
+    --bs-btn-hover-border-color: var(--lf-purple-dark);
+    --bs-btn-active-color: var(--lf-white);
+    --bs-btn-active-bg: var(--lf-purple-dark);
+    --bs-btn-active-border-color: var(--lf-purple-dark);
+    --bs-btn-disabled-color: var(--lf-white);
+    --bs-btn-disabled-bg: var(--lf-purple);
+    --bs-btn-disabled-border-color: var(--lf-purple);
+}
+
+/* ---- Secondary: softer purple — card buttons ("Read More") --------- */
+.lf-btn-secondary {
+    --bs-btn-color: var(--lf-white);
+    --bs-btn-bg: var(--lf-purple-mid);
+    --bs-btn-border-color: var(--lf-purple-mid);
+    --bs-btn-hover-color: var(--lf-white);
+    --bs-btn-hover-bg: var(--lf-purple);
+    --bs-btn-hover-border-color: var(--lf-purple);
+    --bs-btn-active-color: var(--lf-white);
+    --bs-btn-active-bg: var(--lf-purple);
+    --bs-btn-active-border-color: var(--lf-purple);
+    --bs-btn-disabled-color: var(--lf-white);
+    --bs-btn-disabled-bg: var(--lf-purple-mid);
+    --bs-btn-disabled-border-color: var(--lf-purple-mid);
+}
+
+/* ---- Outline: purple line on a light surface ----------------------- */
+.lf-btn-outline {
+    --bs-btn-color: var(--lf-purple);
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: var(--lf-purple);
+    --bs-btn-hover-color: var(--lf-white);
+    --bs-btn-hover-bg: var(--lf-purple);
+    --bs-btn-hover-border-color: var(--lf-purple);
+    --bs-btn-active-color: var(--lf-white);
+    --bs-btn-active-bg: var(--lf-purple-dark);
+    --bs-btn-active-border-color: var(--lf-purple-dark);
+    --bs-btn-disabled-color: var(--lf-purple);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: var(--lf-purple);
+}
+
+/* ---- Light: white button for purple backgrounds -------------------- */
+.lf-btn-light {
+    --bs-btn-color: var(--lf-purple);
+    --bs-btn-bg: var(--lf-white);
+    --bs-btn-border-color: var(--lf-white);
+    --bs-btn-hover-color: var(--lf-purple);
+    --bs-btn-hover-bg: var(--lf-bg);
+    --bs-btn-hover-border-color: var(--lf-bg);
+    --bs-btn-active-color: var(--lf-purple);
+    --bs-btn-active-bg: var(--lf-bg);
+    --bs-btn-active-border-color: var(--lf-bg);
+    --bs-btn-disabled-color: var(--lf-purple);
+    --bs-btn-disabled-bg: var(--lf-white);
+    --bs-btn-disabled-border-color: var(--lf-white);
+}
+
+/* ---- Accent: amber CTA — "Get Your Certificate", "Discover Membership" */
+.lf-btn-accent {
+    --bs-btn-color: var(--lf-ink);
+    --bs-btn-bg: var(--lf-amber);
+    --bs-btn-border-color: var(--lf-amber);
+    --bs-btn-hover-color: var(--lf-ink);
+    --bs-btn-hover-bg: var(--lf-amber-dark);
+    --bs-btn-hover-border-color: var(--lf-amber-dark);
+    --bs-btn-active-color: var(--lf-ink);
+    --bs-btn-active-bg: var(--lf-amber-dark);
+    --bs-btn-active-border-color: var(--lf-amber-dark);
+    --bs-btn-disabled-color: var(--lf-ink);
+    --bs-btn-disabled-bg: var(--lf-amber);
+    --bs-btn-disabled-border-color: var(--lf-amber);
+}
+
+/* Trailing arrow, as drawn on the amber CTAs: a bare arrow in the button's
+   own colour, a little larger and heavier than the label — no badge. */
+.lf-btn-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.lf-btn-arrow .lf-btn-arrow-icon {
+    width: 1.3em;
+    height: 1.3em;
+    flex-shrink: 0;
+}

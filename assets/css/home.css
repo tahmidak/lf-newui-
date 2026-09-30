@@ -1,0 +1,115 @@
+/* ============================================
+    HOME
+    Page sections: lf-hm-hi (hero), lf-hm-mem (membership band).
+    Everything else on this page is a universal section, built once and
+    reused: lf-accri, lf-crs, lf-cert, lf-rev.
+============================================ */
+
+/* ---- Hero: lf-hm-hi ------------------------------------------------ */
+.lf-hm-hi-lead {
+    max-width: 27rem;
+    margin-bottom: 1.5rem;
+}
+
+.lf-hm-hi-search {
+    max-width: 24rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Three inline USPs under the search. The tick is a text glyph, set bold,
+   not an icon font — that is how the design draws it. */
+.lf-hm-hi-usps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lf-hm-hi-usp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-hm-hi-tick {
+    color: var(--lf-ink);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Promo graphic sits in a padded frame, with the offer card over its
+   bottom-left corner */
+.lf-hm-hi-media {
+    position: relative;
+    display: block;
+    padding: 0.75rem;
+    border: 1px solid var(--lf-purple-light);
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+}
+
+.lf-hm-hi-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--lf-radius);
+}
+
+.lf-hm-hi-offer {
+    position: absolute;
+    bottom: -1.25rem;
+    left: -1.5rem;
+    margin-bottom: 0;
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--lf-radius);
+    background-color: var(--lf-white);
+    box-shadow: 0 8px 22px rgba(36, 22, 65, 0.16);
+}
+
+.lf-hm-hi-offer-label {
+    display: block;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-hm-hi-offer-price {
+    display: block;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+    font-weight: 700;
+}
+
+/* ---- Membership band: lf-hm-mem ------------------------------------ */
+.lf-hm-mem {
+    color: var(--lf-white);
+}
+
+.lf-hm-mem-header {
+    color: var(--lf-white);
+}
+
+.lf-hm-mem-text {
+    max-width: 32rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    color: var(--lf-white);
+    font-size: var(--lf-fs-band);
+    line-height: 1.7;
+}
+
+.lf-hm-mem-img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 575.98px) {
+    .lf-hm-hi-offer {
+        left: 0.5rem;
+        bottom: -1rem;
+    }
+}

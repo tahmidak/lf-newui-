@@ -1,0 +1,50 @@
+/* ============================================
+    PAGINATION
+    abbr: lf-pagi
+    Universal. All Courses, All Blogs.
+    Previous · 1 2 3 … 73 · Next — outlined purple pills, the current
+    page filled. Bootstrap .pagination themed through its variables.
+============================================ */
+
+.lf-pagi {
+    --bs-pagination-padding-x: 0.9rem;
+    --bs-pagination-padding-y: 0.5rem;
+    --bs-pagination-font-size: var(--lf-fs-sm);
+    --bs-pagination-color: var(--lf-blue-deep);
+    --bs-pagination-bg: transparent;
+    --bs-pagination-border-width: 1px;
+    --bs-pagination-border-color: var(--lf-purple-light);
+    --bs-pagination-border-radius: var(--lf-radius-pill);
+    --bs-pagination-hover-color: var(--lf-purple);
+    --bs-pagination-hover-bg: var(--lf-bg);
+    --bs-pagination-hover-border-color: var(--lf-purple-light);
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem var(--lf-focus-ring);
+    --bs-pagination-active-color: var(--lf-white);
+    --bs-pagination-active-bg: var(--lf-purple-light);
+    --bs-pagination-active-border-color: var(--lf-purple-light);
+    --bs-pagination-disabled-color: var(--lf-grey-muted);
+    --bs-pagination-disabled-border-color: var(--lf-bg);
+    --bs-pagination-disabled-bg: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0;
+}
+
+/* Every pill is separate in the design, so each link keeps its own radius. */
+.lf-pagi .page-link {
+    border-radius: var(--lf-radius-pill);
+}
+
+.lf-pagi-edge .page-link {
+    padding-inline: 1.5rem;
+}
+
+/* The "........" gap marker */
+.lf-pagi-gap .page-link {
+    border-color: transparent;
+    background: transparent;
+    color: var(--lf-grey-muted);
+    pointer-events: none;
+}

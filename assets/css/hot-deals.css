@@ -1,0 +1,298 @@
+/* ============================================
+    HOT DEALS
+    Page sections: lf-hd-hi (coupon hero), lf-hd-why (why learners choose
+    us), lf-hd-mem (membership band).
+    Universal sections used here: lf-accri, lf-crs, lf-cert, lf-rev.
+============================================ */
+
+/* ---- Hero: lf-hd-hi ------------------------------------------------
+   Full-bleed photo under a purple wash. No vertical padding — the band is
+   the height of its content — but the container keeps its side gutters. */
+.lf-hd-hi {
+    position: relative;
+    padding-block: 0;
+    background-color: var(--lf-purple-night);
+    background-image: url("../imgs/hot-deals-hero-bg.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.lf-hd-hi::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--lf-purple);
+    opacity: 0.65;
+}
+
+.lf-hd-hi > * {
+    position: relative;
+}
+
+/* Left column carries the deeper purple, full band height. The vertical
+   padding lives on the columns, not the wrapper, so the fill reaches the
+   top and bottom edges of the band. */
+.lf-hd-hi-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 3rem;
+}
+
+.lf-hd-hi-left::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--lf-purple);
+    opacity: 0.6;
+}
+
+.lf-hd-hi-left > * {
+    position: relative;
+}
+
+.lf-hd-hi-right {
+    padding-block: 3rem;
+}
+
+/* Coupon card — the one-off H1 variant, not the shared .lf-plan */
+.lf-hd-cpn {
+    position: relative;
+    max-width: 22rem;
+    min-width: 20rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: var(--lf-radius-lg);
+    background-color: rgba(36, 27, 57, 0.55);
+    color: var(--lf-white);
+    cursor: pointer;
+}
+
+.lf-hd-cpn-label {
+    margin-bottom: 0.25rem;
+    font-size: 1.25rem;
+}
+
+.lf-hd-cpn-price {
+    margin-bottom: 0.625rem;
+    color: var(--lf-amber);
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+
+.lf-hd-cpn-off {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--lf-radius-sm);
+    background-color: var(--lf-purple);
+    color: var(--lf-white);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+}
+
+.lf-hd-cpn-regular {
+    margin-bottom: 0.25rem;
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-hd-cpn-access {
+    margin-bottom: 0;
+    color: #7ee08a;
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-hd-cpn-code {
+    display: block;
+    margin-top: 1rem;
+    padding: 0.625rem 1rem;
+    border-radius: var(--lf-radius);
+    background-color: var(--lf-white);
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+    text-align: center;
+}
+
+.lf-hd-cpn-code strong {
+    color: var(--lf-purple);
+}
+
+/* The CTA sits OUTSIDE the coupon box, matched to its width */
+.lf-hd-hi-btn {
+    display: block;
+    max-width: 22rem;
+    margin-top: 1rem;
+    border-color: rgba(255, 255, 255, 0.45);
+    background-color: rgba(74, 38, 146, 0.45);
+    color: var(--lf-white);
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-hd-hi-btn:hover {
+    background-color: rgba(74, 38, 146, 0.75);
+    color: var(--lf-white);
+}
+
+/* Promo graphic in a padded white frame + countdown card over its corner */
+.lf-hd-hi-media {
+    position: relative;
+    display: inline-block;
+    max-width: 26rem;
+    padding: 0.75rem;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+}
+
+.lf-hd-hi-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--lf-radius);
+}
+
+.lf-hd-cd {
+    position: absolute;
+    bottom: -1rem;
+    left: -2rem;
+    margin-bottom: 0;
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--lf-radius);
+    background-color: var(--lf-white);
+    box-shadow: 0 8px 22px rgba(36, 22, 65, 0.25);
+    text-align: center;
+}
+
+.lf-hd-cd-label {
+    display: block;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-xs);
+}
+
+.lf-hd-cd-time {
+    display: block;
+    color: var(--lf-ink);
+    font-size: 1.375rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---- Why learners choose us: lf-hd-why -----------------------------
+   Three cards, three different fills, as drawn. */
+.lf-hd-why-lead {
+    max-width: 44rem;
+    margin-inline: auto;
+    margin-bottom: 2.5rem;
+}
+
+.lf-hd-why-card {
+    height: 100%;
+    padding: 1.75rem 1.5rem;
+    border-radius: var(--lf-radius-lg);
+    background: var(--lf-grad-card-deep);
+    color: var(--lf-white);
+}
+
+.lf-hd-why-card-2 {
+    background: var(--lf-grad-card-bright);
+}
+
+.lf-hd-why-card-3 {
+    background: var(--lf-white);
+    color: var(--lf-ink);
+}
+
+/* Rounded square, not a circle — and the icon matches its box colour */
+.lf-hd-why-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: 2rem;
+    border-radius: var(--lf-radius);
+    background-color: var(--lf-bg);
+    color: var(--lf-purple);
+    font-size: 1.25rem;
+}
+
+.lf-hd-why-title {
+    margin-bottom: 0.625rem;
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-hd-why-text {
+    margin-bottom: 0;
+    font-size: var(--lf-fs-sm);
+    line-height: 1.7;
+}
+
+.lf-hd-why-card-3 .lf-hd-why-text {
+    color: var(--lf-purple-mid);
+}
+
+/* ---- Membership band: lf-hd-mem ------------------------------------
+   The plan card is artwork (an image in a link), not a coded card. */
+.lf-hd-mem {
+    position: relative;
+    overflow: hidden;
+    color: var(--lf-white);
+}
+
+/* Decorative ring in the top-right corner, as drawn */
+.lf-hd-mem::after {
+    content: "";
+    position: absolute;
+    top: -6rem;
+    right: -5rem;
+    width: 20rem;
+    height: 20rem;
+    border: 2.5rem solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.lf-hd-mem > * {
+    position: relative;
+}
+
+.lf-hd-mem-card {
+    display: block;
+    max-width: 24rem;
+}
+
+.lf-hd-mem-card img {
+    width: 100%;
+    height: auto;
+}
+
+.lf-hd-mem-header {
+    color: var(--lf-white);
+}
+
+.lf-hd-mem-text {
+    margin-bottom: 1.75rem;
+    color: var(--lf-white);
+    font-size: var(--lf-fs-band);
+    line-height: 1.8;
+}
+
+@media (max-width: 991.98px) {
+    .lf-hd-hi-media {
+        display: block;
+        margin-top: 2.5rem;
+    }
+
+    .lf-hd-cd {
+        left: 1rem;
+    }
+
+    .lf-hd-mem-card {
+        margin-inline: auto;
+    }
+}

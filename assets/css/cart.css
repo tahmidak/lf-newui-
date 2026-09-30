@@ -1,0 +1,75 @@
+/* ============================================
+    CART
+    Page sections: lf-cart-items (line items + coupon),
+    lf-cart-summary (totals + checkout button).
+    Shared blocks: lf-totals (totals.css), lf-field (forms.css).
+
+    NO PDF for this page — layout is my judgment, copy is from Canva.
+    The design draws the express-payment block as a graphic, so it is an
+    image placeholder here, not coded buttons.
+============================================ */
+
+.lf-cart-title {
+    margin-bottom: 1.5rem;
+    color: var(--lf-ink);
+    font-size: 1.75rem;
+}
+
+/* ---- Coupon: lf-cart-coupon ---------------------------------------- */
+.lf-cart-coupon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.lf-cart-coupon-field {
+    flex: 1 1 14rem;
+}
+
+/* WooCommerce prints its own notice markup here; this is the design's */
+.lf-cart-notice {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    color: var(--lf-green);
+    font-size: var(--lf-fs-sm);
+}
+
+/* ---- Summary: lf-cart-summary -------------------------------------- */
+.lf-cart-summary-btn {
+    width: 100%;
+    margin-top: 1.25rem;
+}
+
+.lf-cart-or {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-block: 1.25rem;
+    color: var(--lf-grey-muted);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-cart-or::before,
+.lf-cart-or::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--lf-bg);
+}
+
+.lf-cart-express {
+    width: 100%;
+    height: auto;
+    border-radius: var(--lf-radius);
+}
+
+@media (min-width: 992px) {
+    .lf-cart-summary-inner {
+        position: sticky;
+        top: 1.5rem;
+    }
+}

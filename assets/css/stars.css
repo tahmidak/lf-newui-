@@ -1,0 +1,55 @@
+/* ============================================
+    STAR RATING
+    abbr: lf-stars
+    Universal. Reviews, course cards, bundle cards.
+
+    Shows a fractional rating properly: 4.9 draws four full stars and a
+    fifth filled 90% of the way, clipped from the right — not a rounded
+    half-star glyph. The fill width is a per-item value, so it is set
+    inline from the CMS rating:
+
+        <span class="lf-stars" style="--lf-stars-fill: 98%">
+
+    (4.9 / 5 = 98%. Inline because it is DATA, not styling.)
+============================================ */
+
+.lf-stars {
+    --lf-stars-fill: 100%;
+    --lf-stars-color: var(--lf-purple);
+    --lf-stars-track-color: rgba(74, 38, 146, 0.22);
+    position: relative;
+    display: inline-block;
+    font-size: 1.125rem;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+}
+
+/* The empty row underneath */
+.lf-stars-track {
+    color: var(--lf-stars-track-color);
+}
+
+/* The filled row on top, clipped to the rating */
+.lf-stars-on {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: var(--lf-stars-fill);
+    color: var(--lf-stars-color);
+}
+
+/* Amber stars on the cards, purple in the reviews section */
+.lf-stars-amber {
+    --lf-stars-color: var(--lf-star);
+    --lf-stars-track-color: rgba(245, 166, 35, 0.25);
+}
+
+.lf-stars-sm {
+    font-size: 0.9375rem;
+}
+
+.lf-stars-lg {
+    font-size: 1.375rem;
+}

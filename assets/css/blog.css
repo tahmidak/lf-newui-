@@ -1,0 +1,14 @@
+/* ============================================
+    BLOG LISTING
+    Page sections: lf-ablg-h (page header), lf-ablg-grid (post grid).
+    The blog card is lf-blcard (cards.css); pagination is lf-pagi.
+    No newsletter, no category filter, no excerpt, no date — the design
+    has none of them on this page.
+
+    NO PDF for this page — layout follows the All Courses listing, copy
+    is from Canva.
+============================================ */
+
+.lf-ablg-h {
+    text-align: center;
+}

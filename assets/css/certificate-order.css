@@ -1,0 +1,132 @@
+/* ============================================
+    CERTIFICATE ORDER
+    abbr: lf-cord
+    Ported from the reference build (CE) and re-coloured to the LF
+    palette. Page sections: lf-cord-hi (hero), lf-cord-offer (the two
+    offer rows), lf-cord-plan (membership card).
+    Universal section used here: lf-accri.
+============================================ */
+
+.lf-cord-hi {
+    color: var(--lf-white);
+}
+
+.lf-cord-hi-header {
+    margin-bottom: 1rem;
+    color: var(--lf-white);
+}
+
+.lf-cord-hi-text {
+    max-width: 32rem;
+    margin-bottom: 0;
+    color: var(--lf-white);
+    font-size: var(--lf-fs-band);
+    line-height: 1.7;
+}
+
+.lf-cord-hi-frame {
+    max-width: 26rem;
+    margin-inline: auto;
+    padding: 0.75rem;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+}
+
+.lf-cord-hi-frame img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--lf-radius);
+}
+
+/* ---- Offer rows ---------------------------------------------------- */
+.lf-cord-offer-img {
+    width: 100%;
+    max-width: 30rem;
+    height: auto;
+    margin-inline: auto;
+}
+
+.lf-cord-offer-header {
+    margin-bottom: 1rem;
+    color: var(--lf-ink);
+    font-size: 2rem;
+    line-height: 1.25;
+}
+
+.lf-cord-offer-text {
+    max-width: 30rem;
+    margin-bottom: 1.75rem;
+    color: var(--lf-grey);
+    line-height: 1.7;
+}
+
+.lf-cord-offer-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+}
+
+/* ---- Membership card ----------------------------------------------- */
+.lf-cord-plan {
+    max-width: 54rem;
+    margin-inline: auto;
+    padding: 2.5rem;
+    border-radius: var(--lf-radius-lg);
+    background: var(--lf-grad-card-deep);
+    color: var(--lf-white);
+}
+
+.lf-cord-plan-header {
+    margin-bottom: 1.25rem;
+    color: var(--lf-white);
+    font-size: 1.75rem;
+}
+
+.lf-cord-plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.875rem;
+    margin-bottom: 1.25rem;
+}
+
+.lf-cord-plan-old {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.25rem;
+    text-decoration: line-through;
+}
+
+.lf-cord-plan-new {
+    color: var(--lf-amber);
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.lf-cord-plan-list {
+    margin-bottom: 1.75rem;
+    padding: 0;
+    list-style: none;
+}
+
+.lf-cord-plan-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    margin-bottom: 0.625rem;
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-cord-plan-list i {
+    color: var(--lf-amber);
+}
+
+.lf-cord-plan-mark {
+    color: rgba(255, 255, 255, 0.18);
+    font-size: 8rem;
+}
+
+@media (min-width: 992px) {
+    .lf-cord-offer-header {
+        font-size: 2.25rem;
+    }
+}

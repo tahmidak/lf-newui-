@@ -1,0 +1,91 @@
+/* ============================================
+    CLAIM YOUR CERTIFICATE
+    abbr: lf-claim
+    Ported from the reference build (CE) and re-coloured to the LF
+    palette. Page sections: lf-claim-banner (order reminder),
+    lf-claim-form (the request form).
+    Fields are the shared lf-field / lf-label (forms.css).
+============================================ */
+
+.lf-claim-banner {
+    padding-block: 1.5rem;
+}
+
+.lf-claim-banner-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-surface);
+}
+
+.lf-claim-banner-media {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.lf-claim-banner-media img {
+    width: 4.5rem;
+    height: auto;
+    border-radius: var(--lf-radius-sm);
+}
+
+.lf-claim-banner-title {
+    margin-bottom: 0.25rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-claim-banner-text {
+    margin-bottom: 0;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+}
+
+/* ---- Form ---------------------------------------------------------- */
+.lf-claim-header {
+    margin-bottom: 1.5rem;
+    color: var(--lf-ink);
+}
+
+.lf-claim-visual {
+    margin-bottom: 1.5rem;
+}
+
+.lf-claim-visual img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--lf-radius-lg);
+}
+
+.lf-claim-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--lf-purple);
+    border-radius: 0 var(--lf-radius) var(--lf-radius) 0;
+    background-color: var(--lf-bg);
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+    line-height: 1.7;
+}
+
+.lf-claim-note i {
+    color: var(--lf-purple);
+    font-size: 1.125rem;
+}
+
+.lf-claim-card {
+    padding: 1.75rem;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-surface);
+}
+
+.lf-claim-submit {
+    margin-top: 0.5rem;
+}

@@ -1,0 +1,12 @@
+/* ============================================
+    CAREER BUNDLES (listing)
+    Page sections: lf-ab-h (page header), lf-ab-grid (bundle grid).
+    The bundle card is the shared course card with its two optional rows
+    turned on — the guarantee line and the discount badge (cards.css).
+    Universal section used here: lf-accri.
+============================================ */
+
+.lf-ab-h-text {
+    max-width: 34rem;
+    margin-bottom: 0;
+}

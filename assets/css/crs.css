@@ -1,0 +1,40 @@
+/* ============================================
+    POPULAR COURSES
+    abbr: lf-crs
+    Universal. Home and Hot Deals — same section, Hot Deals adds one
+    extra line of copy under the lead.
+
+    Heading block (eyebrow + h2 + lead) on the left, search pill on the
+    right: space-between, centred against each other.
+
+    Bootstrap grid from md; a scroll-snap row below md (.lf-crow in
+    cards.css), so the card count is whatever the loop prints.
+============================================ */
+
+.lf-crs-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.lf-crs-head-text {
+    max-width: 44rem;
+}
+
+.lf-crs-head-text .lf-sec-header {
+    margin-bottom: 0.5rem;
+}
+
+.lf-crs-search {
+    width: 100%;
+    max-width: 18rem;
+}
+
+.lf-crs-extra {
+    max-width: 44rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}

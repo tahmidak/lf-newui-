@@ -1,0 +1,263 @@
+/* ============================================
+    LIFETIME MEMBERSHIP
+    Page sections: lf-lt-hi (hero), lf-lt-hl (membership highlights),
+    lf-lt-ben (benefits), lf-lt-cat (course categories),
+    lf-lt-how (how to start), lf-lt-cta (closing CTA).
+    Universal sections used here: lf-faq, lf-rev.
+
+    The plan card in the hero is artwork (an image in a link), not a
+    coded card — same treatment as the Hot Deals membership band.
+============================================ */
+
+/* ---- Hero: lf-lt-hi ------------------------------------------------ */
+.lf-lt-hi {
+    position: relative;
+    overflow: hidden;
+    color: var(--lf-white);
+}
+
+/* Decorative ring in the top-right corner, as drawn */
+.lf-lt-hi::after {
+    content: "";
+    position: absolute;
+    top: -7rem;
+    right: -6rem;
+    width: 22rem;
+    height: 22rem;
+    border: 2.5rem solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.lf-lt-hi > * {
+    position: relative;
+}
+
+.lf-lt-hi-header {
+    color: var(--lf-white);
+}
+
+.lf-lt-hi-text {
+    max-width: 32rem;
+    margin-bottom: 0;
+    color: var(--lf-white);
+    font-size: var(--lf-fs-band);
+    line-height: 1.8;
+}
+
+.lf-lt-hi-card {
+    display: block;
+    max-width: 24rem;
+    margin-inline: auto;
+}
+
+.lf-lt-hi-card img {
+    width: 100%;
+    height: auto;
+}
+
+/* ---- Highlights: lf-lt-hl ------------------------------------------ */
+.lf-lt-hl-header {
+    color: var(--lf-purple);
+}
+
+.lf-lt-hl-text {
+    margin-bottom: 1.75rem;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-normal);
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* White tile with a thin purple outline, as drawn */
+.lf-lt-hl-item {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    height: 100%;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--lf-purple-light);
+    border-radius: var(--lf-radius);
+    background-color: var(--lf-white);
+    color: var(--lf-purple);
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-lt-hl-item i {
+    flex-shrink: 0;
+    color: var(--lf-purple);
+    font-size: 1.5rem;
+}
+
+/* ---- Benefits: lf-lt-ben ------------------------------------------- */
+.lf-lt-ben-header {
+    margin-bottom: 2.5rem;
+    color: var(--lf-purple);
+}
+
+.lf-lt-ben-card {
+    height: 100%;
+    padding: 1.75rem 1.5rem;
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+}
+
+.lf-lt-ben-title {
+    /* The design leaves a clear gap between title and copy */
+    margin-bottom: 1rem;
+    color: var(--lf-purple);
+    font-size: 1.25rem;
+}
+
+.lf-lt-ben-text {
+    margin-bottom: 0;
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+    line-height: 1.8;
+}
+
+/* ---- Course categories: lf-lt-cat ----------------------------------
+   Purple band, white rectangular chips. Clamped to three rows with an
+   arrow that expands the rest — assets/js/expand.js. */
+.lf-lt-cat {
+    color: var(--lf-white);
+}
+
+.lf-lt-cat-header {
+    margin-bottom: 2rem;
+    color: var(--lf-white);
+}
+
+/* Clamped to roughly three rows; the caret opens the rest (expand.js) */
+.lf-lt-cat-wrap {
+    --lf-expand-h: 10.5rem;
+    --lf-expand-fade: var(--lf-purple);
+}
+
+.lf-lt-cat-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.875rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lf-lt-cat-chip {
+    display: block;
+    padding: 0.625rem 1rem;
+    border-radius: var(--lf-radius-sm);
+    background-color: var(--lf-white);
+    color: var(--lf-purple);
+    font-size: var(--lf-fs-sm);
+    text-align: center;
+}
+
+.lf-lt-cat-chip:hover {
+    background-color: var(--lf-bg);
+    color: var(--lf-purple);
+}
+
+/* ---- Closing CTA: lf-lt-cta ---------------------------------------- */
+.lf-lt-cta {
+    color: var(--lf-white);
+    text-align: center;
+}
+
+.lf-lt-cta-header {
+    margin-bottom: 0.75rem;
+    color: var(--lf-white);
+}
+
+.lf-lt-cta-text {
+    max-width: 34rem;
+    margin-inline: auto;
+    margin-bottom: 1.75rem;
+    color: var(--lf-white);
+    font-size: var(--lf-fs-band);
+}
+
+/* ---- How to Start: lf-lt-how --------------------------------------- */
+.lf-lt-how-header {
+    margin-bottom: 2rem;
+    color: var(--lf-ink);
+    text-align: center;
+}
+
+.lf-lt-how-row {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.lf-lt-how-card {
+    flex: 1 1 0;
+    padding: 0.75rem;
+    border: 1px solid var(--lf-purple-light);
+    border-radius: var(--lf-radius-lg);
+    background-color: var(--lf-white);
+}
+
+.lf-lt-how-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    margin-bottom: 1rem;
+    border-radius: var(--lf-radius);
+    object-fit: cover;
+}
+
+.lf-lt-how-title {
+    margin-bottom: 1rem;
+    padding-inline: 0.5rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-normal);
+}
+
+.lf-lt-how-list {
+    margin-bottom: 0;
+    padding-left: 1.75rem;
+    color: var(--lf-purple);
+    font-size: var(--lf-fs-sm);
+    line-height: 1.7;
+}
+
+/* Chevron between the steps */
+.lf-lt-how-step {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    align-self: center;
+    border-radius: var(--lf-radius-pill);
+    background-color: var(--lf-purple);
+    color: var(--lf-white);
+    font-size: 0.75rem;
+}
+
+@media (max-width: 991.98px) {
+    .lf-lt-cat-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lf-lt-how-row {
+        flex-wrap: wrap;
+    }
+
+    .lf-lt-how-card {
+        flex: 1 1 100%;
+    }
+
+    .lf-lt-how-step {
+        transform: rotate(90deg);
+    }
+}
+
+@media (min-width: 992px) {
+    .lf-lt-hi-card {
+        margin-inline: 0 auto;
+    }
+}

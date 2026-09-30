@@ -1,0 +1,57 @@
+/* ============================================
+    FORMS
+    abbr: lf-field
+    Shared field styling: Checkout, the cart coupon box and the blog
+    comment form all use these. WooCommerce ships its own form CSS on
+    top of this — keep the selectors single-class so the theme dev can
+    win with a normal override instead of !important.
+============================================ */
+
+.lf-label {
+    display: block;
+    margin-bottom: 0.375rem;
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+    font-weight: 700;
+}
+
+.lf-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--lf-bg);
+    border-radius: var(--lf-radius);
+    background-color: var(--lf-surface);
+    color: var(--lf-ink);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-field::placeholder {
+    color: var(--lf-grey-muted);
+    opacity: 1;
+}
+
+.lf-field:focus {
+    outline: 0;
+    border-color: var(--lf-purple);
+    box-shadow: 0 0 0 0.25rem var(--lf-focus-ring);
+}
+
+/* The asterisk on a required label */
+.lf-req {
+    color: var(--lf-red);
+}
+
+.lf-check {
+    color: var(--lf-grey);
+    font-size: var(--lf-fs-sm);
+}
+
+.lf-check .form-check-input:checked {
+    background-color: var(--lf-purple);
+    border-color: var(--lf-purple);
+}
+
+.lf-check .form-check-input:focus {
+    border-color: var(--lf-purple);
+    box-shadow: 0 0 0 0.25rem var(--lf-focus-ring);
+}
